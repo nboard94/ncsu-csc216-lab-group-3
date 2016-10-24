@@ -162,6 +162,12 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 			return temp;
 		}
 	}
+	public void setCapacity(int capacity) {
+		if (capacity < size || capacity < 0) {
+			throw new IllegalArgumentException();
+		}
+		this.capacity = capacity;
+	}
 
 	/**
 	 * Individual node in the LinkedAbstractList

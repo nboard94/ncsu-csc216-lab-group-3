@@ -245,4 +245,27 @@ public class LinkedAbstractListTest {
 		}
 
 	}
+	@Test
+	public void testsetCapacity(){
+		LinkedAbstractList<String> a = new LinkedAbstractList<String>(10);
+		assertEquals(a.size(),0);
+		a.add(0, "test");
+		a.add(0, "string");
+		a.add(0, "words");
+		a.setCapacity(3);
+		try{
+			a.add(0, "tests");
+			fail();
+		} catch(IllegalArgumentException E){
+			assertEquals(a.size(),3);
+		}
+		a.setCapacity(4);
+		try{
+			a.add(0, "tests");
+			assertEquals(a.size(),4);
+		} catch(IllegalArgumentException E){
+			fail();
+		}
+		
+	}
 }
