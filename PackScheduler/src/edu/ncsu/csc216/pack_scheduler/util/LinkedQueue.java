@@ -30,5 +30,5 @@ public class LinkedQueue<E> implements Queue<E> {
 		linkedList.setCapacity(capacity);
 		
 	}
-	
+
 }
