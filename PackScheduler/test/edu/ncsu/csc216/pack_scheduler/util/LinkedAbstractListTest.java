@@ -266,6 +266,19 @@ public class LinkedAbstractListTest {
 		} catch(IllegalArgumentException E){
 			fail();
 		}
+		try{
+			a.setCapacity(-1);
+			fail();
+		} catch(IllegalArgumentException E){
+			assertEquals(a.size(),4);
+		}
+		try{
+			a.setCapacity(2);
+			fail();
+		} catch(IllegalArgumentException E){
+			assertEquals(a.size(),4);
+		}
+		
 		
 	}
 }
