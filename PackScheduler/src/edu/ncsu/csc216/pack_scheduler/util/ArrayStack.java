@@ -2,11 +2,17 @@ package edu.ncsu.csc216.pack_scheduler.util;
 
 public class ArrayStack<E> implements Stack {
 
+	/** ArrayList to store the data*/
 	ArrayList<E> list = new ArrayList<E>();
-	int capacityList = 10;
 	
-	public ArrayStack() {
-		
+	/** The capacity of the ArrayStack */
+	int capacityList;
+	
+	/**
+	 * Constructor for the ArrayStack;
+	 */
+	public ArrayStack(int cap) {
+		this.setCapacity(cap);
 	}
 	
 	
