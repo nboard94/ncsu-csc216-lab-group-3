@@ -1,15 +1,16 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
-
-public class LinkedStack<E> implements Stack<E>{
+public class LinkedQueue<E> implements Queue<E> {
 	LinkedAbstractList<E> linkedList;
-	public LinkedStack(){
-		linkedList = new LinkedAbstractList<E>(10);
-	}
-	
+
 	@Override
-	public E pop() {
-		return linkedList.remove(0);
+	public void enqueue(E element) {
+		linkedList.add(0,element);		
+	}
+
+	@Override
+	public E dequeue() {
+		return linkedList.remove(linkedList.size());
 	}
 
 	@Override
@@ -29,10 +30,5 @@ public class LinkedStack<E> implements Stack<E>{
 		linkedList.setCapacity(capacity);
 		
 	}
-
-	@Override
-	public void push(E element) {
-		linkedList.add(0, element);
-		
-	}
+	
 }
