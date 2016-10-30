@@ -104,9 +104,6 @@ public class ArrayList<E> extends AbstractList<E> {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		if (list.length == 0) {
-			throw new IndexOutOfBoundsException();
-		}
 		E element = list[index];
 		
 		for(int i = index; i < list.length - 1; i++) {
