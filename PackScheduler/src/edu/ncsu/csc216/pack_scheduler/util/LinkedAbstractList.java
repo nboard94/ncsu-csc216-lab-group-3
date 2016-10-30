@@ -58,9 +58,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 		if (i > size || i < 0) {
 			throw new IndexOutOfBoundsException("Index outside of list size.");
 		}
-		for (int k = 0; k < i - 1; k++) {
-			currentNode = currentNode.next;
-		}
+		
 		if (i == 0) {
 			if (front == null) {
 				this.front = new ListNode<E>(element);
@@ -73,9 +71,12 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 				this.front = new ListNode<E>(element, front);
 			}
 		} else if(i == size){
-			currentNode.next = new ListNode<E>(element, currentNode);
-			this.back = currentNode.next;
+			this.back.next = new ListNode<E>(element, currentNode);
+			this.back = this.back.next;
 		} else {
+			for (int k = 0; k < i - 1; k++) {
+				currentNode = currentNode.next;
+			}
 			if (currentNode == null) {
 				this.front = new ListNode<E>(element);
 			} else if (currentNode.next == null) {
@@ -163,7 +164,17 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 			front = currentNode.next;
 			size--;
 			return currentNode.data;
-		} else {
+		} else if(index == size()){
+			for (int k = 0; k < index - 1; k++) {
+				currentNode = currentNode.next;
+			}
+			E temp = (E) currentNode.next.data;
+			currentNode.next = null;
+			size--;
+			return temp;
+			
+		}
+		else {
 			E temp = (E) currentNode.next.data;
 			currentNode.next = currentNode.next.next;
 			size--;
