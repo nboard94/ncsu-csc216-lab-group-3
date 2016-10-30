@@ -56,13 +56,16 @@ public class LinkedQueueTest {
 		q.enqueue("three");
 		q.enqueue("four");
 		assertEquals(3, q.size());
-		q.dequeue();
+		assertEquals("two", q.dequeue());
 		assertEquals(2, q.size());
-		q.dequeue();
+		
+		assertEquals("three", q.dequeue());
 		assertEquals(1, q.size());
+		
 		q.enqueue("five");
-		q.dequeue();
+		assertEquals("four", q.dequeue());
 		assertEquals(1, q.size());
+		assertEquals("five", q.dequeue());
 	}
 
 	/**

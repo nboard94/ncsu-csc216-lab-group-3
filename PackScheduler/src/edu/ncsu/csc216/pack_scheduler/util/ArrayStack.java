@@ -29,7 +29,7 @@ public class ArrayStack<E> implements Stack<E> {
 	@Override
 	public void push(E element) {
 		if (list.size() < capacityList) {
-			list.add(0, element);
+			list.add(list.size(), element);
 		}
 		else {
 			throw new IllegalArgumentException();
@@ -42,7 +42,7 @@ public class ArrayStack<E> implements Stack<E> {
 	 */
 	@Override
 	public E pop() {
-		return list.remove(0);
+		return list.remove(list.size() - 1);
 	}
 
 	/**

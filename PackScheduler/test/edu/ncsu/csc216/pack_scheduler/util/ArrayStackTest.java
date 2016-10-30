@@ -23,7 +23,7 @@ public class ArrayStackTest {
 		assertEquals(1, stack.size());
 		
 		stack.push("Obj 2");
-		assertEquals("Obj 2", stack.list.get(0));
+		assertEquals("Obj 2", stack.list.get(1));
 		assertEquals(2, stack.size());
 	}
 	
