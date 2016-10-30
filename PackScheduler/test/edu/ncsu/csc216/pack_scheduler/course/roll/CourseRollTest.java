@@ -35,7 +35,15 @@ public class CourseRollTest {
 	public void testCourseRoll() {
 		Course c = new Course("CSC216", "Programming Concepts - Java", "001", 4, "sesmith5", 10, "A");
 		//CourseRoll roll = new CourseRoll(10); //Update as below
-		CourseRoll roll = c.getCourseRoll();
+		Course c1 = null;
+		CourseRoll roll;
+		try {
+			roll = new CourseRoll(c1, 50);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Course cannot be null.");
+		}
+		roll = c.getCourseRoll();
 		assertEquals(10, roll.getEnrollmentCap());
 		assertEquals(0, roll.getNumberOnWaitlist());
 	}
