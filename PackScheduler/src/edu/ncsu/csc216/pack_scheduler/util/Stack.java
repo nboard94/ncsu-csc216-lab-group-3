@@ -10,13 +10,13 @@ public interface Stack<E> {
 	
 	/**
 	 * Adds an element to the stack at the top.
-	 * @param element The element to add to the stack.
+	 * @param E element The element to add to the stack.
 	 */
 	void push(E element);
 	
 	/**
 	 * Removes an element from the stack at the top.
-	 * @return The element at the top of the stack.
+	 * @return E The element at the top of the stack.
 	 */
 	E pop();
 	

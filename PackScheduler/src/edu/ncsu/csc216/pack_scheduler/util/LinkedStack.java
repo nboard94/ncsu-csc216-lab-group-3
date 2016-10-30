@@ -7,16 +7,17 @@ package edu.ncsu.csc216.pack_scheduler.util;
  * @param <E> Element type of stack
  */
 public class LinkedStack<E> implements Stack<E> {
-	/** Linked List to store stack */
-	LinkedAbstractList<E> linkedList;
+	
 	/** Initial capacity of list */
 	private static final int INIT_SIZE = 10;
+	/** Linked List to store stack */
+	LinkedAbstractList<E> linkedList = new LinkedAbstractList<E>(INIT_SIZE);
 	
 	/**
 	 * Constructs a LinkedStack list
 	 */
-	public LinkedStack(){
-		linkedList = new LinkedAbstractList<E>(INIT_SIZE);
+	public LinkedStack() {
+		// Sets up linked stack
 	}
 	
 	/**

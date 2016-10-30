@@ -2,6 +2,8 @@ package edu.ncsu.csc216.pack_scheduler.util;
 
 import static org.junit.Assert.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
 /**
  * Tests LinkedQueue
@@ -46,7 +48,7 @@ public class LinkedQueueTest {
 		
 		try {
 			q.dequeue();
-		} catch (IndexOutOfBoundsException e) {
+		} catch (NoSuchElementException e) {
 			assertEquals(e.getMessage(), "Can not remove from empty list.");
 		}
 		

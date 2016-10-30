@@ -24,7 +24,7 @@ public class ArrayQueue<E> implements Queue<E> {
 	}
 	/**
 	 * Adds element to back of queue
-	 * @param element
+	 * @param element Element to add
 	 * @throws IllegalArgumentException if size is
 	 * equal to capacity
 	 */
