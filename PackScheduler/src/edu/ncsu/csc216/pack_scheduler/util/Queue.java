@@ -9,7 +9,7 @@ package edu.ncsu.csc216.pack_scheduler.util;
 public interface Queue<E> {
 	/**
 	 * Adds element to back of queue
-	 * @param element
+	 * @param element Element to add
 	 * @throws IllegalArgumentException if size is
 	 * equal to capacity
 	 */
@@ -36,7 +36,7 @@ public interface Queue<E> {
 	
 	/**
 	 * Sets the queue's capacity
-	 * @param capacity
+	 * @param capacity Maximum capacity of list
 	 * @throws IllegalArgumentException if new capacity is
 	 * negative or less than the current size
 	 */

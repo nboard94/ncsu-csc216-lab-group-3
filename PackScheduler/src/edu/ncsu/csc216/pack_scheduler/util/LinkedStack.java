@@ -10,7 +10,7 @@ public class LinkedStack<E> implements Stack<E> {
 	/** Linked List to store stack */
 	LinkedAbstractList<E> linkedList;
 	/** Initial capacity of list */
-	private final int INIT_SIZE = 10;
+	private static final int INIT_SIZE = 10;
 	
 	/**
 	 * Constructs a LinkedStack list

@@ -15,6 +15,7 @@ public class ArrayStack<E> implements Stack<E> {
 	
 	/**
 	 * Constructor for the ArrayStack;
+	 * @param cap Maximum capcity of stack
 	 */
 	public ArrayStack(int cap) {
 		this.setCapacity(cap);

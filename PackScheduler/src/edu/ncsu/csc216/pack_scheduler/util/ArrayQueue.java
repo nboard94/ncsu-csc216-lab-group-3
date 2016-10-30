@@ -13,7 +13,11 @@ public class ArrayQueue<E> implements Queue<E> {
 	private ArrayList<E> list;
 	/** Maximum number of elements permitted in list */
 	private int capacity;
-
+	
+	/**
+	 * Constructs a new arraylist Queue
+	 * @param capacity Maximum capacity of list
+	 */
 	public ArrayQueue(int capacity) {
 		list = new ArrayList<E>();
 		setCapacity(capacity); 

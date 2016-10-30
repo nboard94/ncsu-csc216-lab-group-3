@@ -3,9 +3,16 @@ package edu.ncsu.csc216.pack_scheduler.util;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
+/**
+ * Tests ArrayStack
+ * @author dndereef
+ *
+ */
 public class ArrayStackTest {
 	
+	/**
+	 * Tests push
+	 */
 	@Test
 	public void pushTest() {
 		ArrayStack<String> stack = new ArrayStack<String>(10);
@@ -20,6 +27,9 @@ public class ArrayStackTest {
 		assertEquals(2, stack.size());
 	}
 	
+	/**
+	 * Tests pop
+	 */
 	@Test
 	public void popTest() {
 		ArrayStack<String> stack = new ArrayStack<String>(10);
@@ -33,6 +43,9 @@ public class ArrayStackTest {
 		assertEquals(0, stack.size());
 	}
 	
+	/**
+	 * Tests isEmpty
+	 */
 	@Test
 	public void emptyTest() {
 		ArrayStack<String> stack = new ArrayStack<String>(10);
@@ -45,6 +58,9 @@ public class ArrayStackTest {
 		assertTrue(stack.isEmpty());
 	}
 	
+	/**
+	 * Tests setCapacity
+	 */
 	@Test
 	public void setCapacityTest() {
 		ArrayStack<String> stack = new ArrayStack<String>(10);

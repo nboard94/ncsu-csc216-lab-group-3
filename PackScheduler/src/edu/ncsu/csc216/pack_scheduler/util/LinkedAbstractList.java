@@ -131,7 +131,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 		}
 		for (int j = 0; j < size; j++) {
 			if (element.equals(get(j))) {
-				throw new IllegalArgumentException("Capacity reached.");
+				throw new IllegalArgumentException("Duplicate element.");
 			}
 		}
 		if (index >= size || index < 0) {
@@ -183,7 +183,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	}
 	/**
 	 * Sets the new capacity
-	 * @param capacity
+	 * @param capacity Maximum capacity of list
 	 * @throws IllegalArgumentException if new capacity is 
 	 * less than the size of list or negative
 	 */

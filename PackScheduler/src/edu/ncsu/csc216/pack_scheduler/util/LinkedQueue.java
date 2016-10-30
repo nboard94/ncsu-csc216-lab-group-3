@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
+import java.util.NoSuchElementException;
+
 /**
  * LinkedList Queue
  * @author dndereef
@@ -29,10 +31,14 @@ public class LinkedQueue<E> implements Queue<E> {
 
 	/**
 	 * Removes element from queue (front)
+	 * @throws NoSuchElementException if list is empty
 	 * @return the removed element
 	 */
 	@Override
 	public E dequeue() {
+		if (linkedList.isEmpty()) {
+			throw new NoSuchElementException("Can not remove from empty list.");
+		}
 		return linkedList.remove(0);
 	}
 

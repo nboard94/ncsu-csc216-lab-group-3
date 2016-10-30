@@ -11,8 +11,8 @@ import org.junit.Test;
  *
  */
 public class ArrayQueueTest {
-
-	private final int MAX_CAP = 5;
+	/** Testing parameter for capacity */
+	private static final int MAX_CAP = 5;
 	/**
 	 * Tests enqueue
 	 */

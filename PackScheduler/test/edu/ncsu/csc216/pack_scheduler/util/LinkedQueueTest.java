@@ -10,7 +10,7 @@ import org.junit.Test;
  */
 public class LinkedQueueTest {
 	/** Capacity test value */
-	private final int MAX_CAP = 5;
+	private static final int MAX_CAP = 5;
 	
 	/**
 	 * Tests enqueue
