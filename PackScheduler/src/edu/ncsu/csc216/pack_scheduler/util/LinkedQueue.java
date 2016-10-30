@@ -1,25 +1,21 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
-import java.util.LinkedList;
-
 
 public class LinkedQueue<E> implements Queue<E> {
-	LinkedList<E> linkedList;
-	int capacity;
+	LinkedAbstractList<E> linkedList;
 
 	public LinkedQueue(int c) {
-		linkedList = new LinkedList<E>();
-		capacity = c;
+		linkedList = new LinkedAbstractList<E>(c);
 	}
 	
 	@Override
 	public void enqueue(E element) {
-		linkedList.add(0,element);		
+		linkedList.add(linkedList.size(), element);		
 	}
 
 	@Override
 	public E dequeue() {
-		return linkedList.remove(linkedList.size());
+		return linkedList.remove(0);
 	}
 
 	@Override
@@ -36,8 +32,7 @@ public class LinkedQueue<E> implements Queue<E> {
 
 	@Override
 	public void setCapacity(int c) {
-		capacity = c;
-		
+		linkedList.setCapacity(c);
 	}
 
 }

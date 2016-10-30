@@ -27,7 +27,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	 */
 	public LinkedAbstractList(int i) {
 		if (i < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Capacity must be greater than 0.");
 		}
 		this.front = null;
 		this.back = null;
@@ -45,18 +45,18 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	public void add(int i, E element) {
 		ListNode<E> currentNode = front;
 		if (size >= capacity) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Capacity reached.");
 		}
 		if (element == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("Element cannot be null.");
 		}
 		for (int j = 0; j < size; j++) {
 			if (element.equals(get(j))) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Duplicate element found.");
 			}
 		}
 		if (i > size || i < 0) {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("Index outside of list size.");
 		}
 		for (int k = 0; k < i - 1; k++) {
 			currentNode = currentNode.next;
@@ -94,7 +94,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	@Override
 	public E get(int index) {
 		if (index >= size || index < 0) {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("Index outside of list size.");
 		}
 		ListNode<E> currentNode = front;
 		for (int i = 0; i < index; i++) {
@@ -124,15 +124,15 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	public E set(int index, E element) {
 		ListNode<E> currentNode = front;
 		if (element == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("Element cannot be null.");
 		}
 		for (int j = 0; j < size; j++) {
 			if (element.equals(get(j))) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException("Capacity reached.");
 			}
 		}
 		if (index >= size || index < 0) {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("Index outside of list size.");
 		}
 		for (int k = 0; k < index; k++) {
 			currentNode = currentNode.next;
@@ -151,7 +151,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	@Override
 	public E remove(int index) {
 		if (index >= size || index < 0) {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("Can not remove from empty list.");
 		}
 		ListNode<E> currentNode = front;
 		for (int k = 0; k < index - 1; k++) {
@@ -170,7 +170,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	}
 	public void setCapacity(int capacity) {
 		if (capacity < size || capacity < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Capacity must have room for elements.");
 		}
 		this.capacity = capacity;
 	}
