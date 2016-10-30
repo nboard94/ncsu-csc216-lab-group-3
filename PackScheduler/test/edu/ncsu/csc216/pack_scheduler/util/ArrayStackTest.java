@@ -8,7 +8,7 @@ public class ArrayStackTest {
 	
 	@Test
 	public void pushTest() {
-		ArrayStack stack = new ArrayStack(10);
+		ArrayStack<String> stack = new ArrayStack<String>(10);
 		assertEquals(0, stack.size());
 		
 		stack.push("Obj 1");
@@ -22,7 +22,7 @@ public class ArrayStackTest {
 	
 	@Test
 	public void popTest() {
-		ArrayStack stack = new ArrayStack(10);
+		ArrayStack<String> stack = new ArrayStack<String>(10);
 		stack.push("Obj 1");
 		stack.push("Obj 2");
 
@@ -35,7 +35,7 @@ public class ArrayStackTest {
 	
 	@Test
 	public void emptyTest() {
-		ArrayStack stack = new ArrayStack(10);
+		ArrayStack<String> stack = new ArrayStack<String>(10);
 		assertEquals(0, stack.size());
 
 		stack.push("Obj 1");
@@ -47,10 +47,11 @@ public class ArrayStackTest {
 	
 	@Test
 	public void setCapacityTest() {
-		ArrayStack stack = new ArrayStack(3);
+		ArrayStack<String> stack = new ArrayStack<String>(10);
 		stack.push("Obj 1");
 		
 		try {
+			stack.setCapacity(5);
 			stack.push("Obj 2");
 		} catch (IllegalArgumentException e) {
 			fail();
@@ -61,7 +62,15 @@ public class ArrayStackTest {
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
+		
 		try {
+			stack.setCapacity(1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(3, stack.size());
+		}
+		try {
+			stack.setCapacity(3);
 			stack.push("Obj 4");
 			fail();
 		} catch (IllegalArgumentException e) {

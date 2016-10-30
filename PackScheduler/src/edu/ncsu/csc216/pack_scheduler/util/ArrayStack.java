@@ -68,6 +68,9 @@ public class ArrayStack<E> implements Stack<E> {
 	 */
 	@Override
 	public void setCapacity(int capacity) {
+		if (capacity < list.size()) {
+			throw new IllegalArgumentException("Capacity too small for number of elements");
+		}
 		capacityList = capacity;
 	}
 

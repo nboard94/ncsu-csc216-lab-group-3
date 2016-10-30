@@ -16,7 +16,7 @@ public class ArrayQueue<E> implements Queue<E> {
 
 	public ArrayQueue(int capacity) {
 		list = new ArrayList<E>();
-		this.capacity = capacity; 
+		setCapacity(capacity); 
 	}
 	/**
 	 * Adds element to back of queue
