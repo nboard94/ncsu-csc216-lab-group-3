@@ -25,7 +25,7 @@ public class LinkedStack<E> implements Stack<E> {
 	 */
 	@Override
 	public E pop() {
-		return linkedList.remove(size() - 1);
+		return linkedList.remove(size()-1);
 	}
 
 	/**

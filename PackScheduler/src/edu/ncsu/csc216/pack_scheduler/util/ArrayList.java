@@ -101,7 +101,7 @@ public class ArrayList<E> extends AbstractList<E> {
 		if (size <= -1) {
 			throw new IndexOutOfBoundsException();
 		}
-		if (index < 0 || index > size() - 1) {
+		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (list.length == 0) {
