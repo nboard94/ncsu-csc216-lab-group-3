@@ -8,16 +8,15 @@ package edu.ncsu.csc216.pack_scheduler.util;
  */
 public class LinkedStack<E> implements Stack<E> {
 	
-	/** Initial capacity of list */
-	private static final int INIT_SIZE = 10;
 	/** Linked List to store stack */
-	LinkedAbstractList<E> linkedList = new LinkedAbstractList<E>(INIT_SIZE);
+	LinkedAbstractList<E> linkedList;
 	
 	/**
 	 * Constructs a LinkedStack list
+	 * @param cap Capacity of list
 	 */
-	public LinkedStack() {
-		// Sets up linked stack
+	public LinkedStack(int cap) {
+		linkedList = new LinkedAbstractList<E>(cap);
 	}
 	
 	/**

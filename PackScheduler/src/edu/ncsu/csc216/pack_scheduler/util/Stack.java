@@ -4,13 +4,13 @@ package edu.ncsu.csc216.pack_scheduler.util;
  * Interface for the stack methods.
  * @author NBoar
  *
- * @param <E>
+ * @param <E> Element type of stack
  */
 public interface Stack<E> {
 	
 	/**
 	 * Adds an element to the stack at the top.
-	 * @param E element The element to add to the stack.
+	 * @param element The element to add to the stack.
 	 */
 	void push(E element);
 	

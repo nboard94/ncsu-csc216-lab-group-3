@@ -10,12 +10,15 @@ import org.junit.Test;
  */
 public class LinkedStackTest {
 
+	/** Capacity test value */
+	private static final int MAX_CAP = 5;
+	
 	/**
 	 * Tests push
 	 */
 	@Test 
 	public void testPush(){
-		LinkedStack<String> stack = new LinkedStack<String>();
+		LinkedStack<String> stack = new LinkedStack<String>(MAX_CAP);
 		
 		assertEquals(0, stack.size());
 		stack.push("word");
@@ -31,7 +34,7 @@ public class LinkedStackTest {
 	 */
 	@Test
 	public void testPop(){
-		LinkedStack<String> stack = new LinkedStack<String>();
+		LinkedStack<String> stack = new LinkedStack<String>(MAX_CAP);
 		
 		assertEquals(0, stack.size());
 		stack.push("word");
@@ -49,7 +52,7 @@ public class LinkedStackTest {
 	 */
 	@Test
 	public void testIsEmpty(){
-		LinkedStack<String> stack = new LinkedStack<String>();
+		LinkedStack<String> stack = new LinkedStack<String>(MAX_CAP);
 
 		assertEquals(0, stack.size());
 		assertTrue(stack.isEmpty());
@@ -65,7 +68,7 @@ public class LinkedStackTest {
 	 */
 	@Test
 	public void testSetCapacity(){
-		LinkedStack<String> stack = new LinkedStack<String>();
+		LinkedStack<String> stack = new LinkedStack<String>(MAX_CAP);
 		
 		try{
 			stack.setCapacity(-1);
