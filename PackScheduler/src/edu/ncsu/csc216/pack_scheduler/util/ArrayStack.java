@@ -1,6 +1,6 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
-public class ArrayStack<E> implements Stack {
+public class ArrayStack<E> implements Stack<E> {
 
 	/** ArrayList to store the data*/
 	ArrayList<E> list = new ArrayList<E>();
@@ -17,9 +17,9 @@ public class ArrayStack<E> implements Stack {
 	
 	
 	@Override
-	public void push(Object element) {
+	public void push(E element) {
 		if (list.size() < capacityList) {
-			list.add(0, (E) element);
+			list.add(0, element);
 		}
 		else {
 			throw new IllegalArgumentException();
@@ -27,7 +27,7 @@ public class ArrayStack<E> implements Stack {
 	}
 
 	@Override
-	public Object pop() {
+	public E pop() {
 		return list.remove(0);
 	}
 

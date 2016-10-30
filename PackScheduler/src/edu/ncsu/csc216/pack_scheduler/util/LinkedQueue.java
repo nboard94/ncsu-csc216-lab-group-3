@@ -1,7 +1,7 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
 public class LinkedQueue<E> implements Queue<E> {
-	LinkedAbstractList<E> linkedList;
+	private LinkedAbstractList<E> linkedList;
 
 	@Override
 	public void enqueue(E element) {
