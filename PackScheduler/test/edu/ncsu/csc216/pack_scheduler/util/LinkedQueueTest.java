@@ -3,10 +3,15 @@ package edu.ncsu.csc216.pack_scheduler.util;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
+/**
+ * Tests LinkedQueue
+ * @author dndereef
+ *
+ */
 public class LinkedQueueTest {
-
+	/** Capacity test value */
 	private final int MAX_CAP = 5;
+	
 	/**
 	 * Tests enqueue
 	 */

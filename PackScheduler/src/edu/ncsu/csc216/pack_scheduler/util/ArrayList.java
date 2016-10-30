@@ -8,11 +8,11 @@ import java.util.AbstractList;
  * @param <E> generic representation of data type to be used
  */
 public class ArrayList<E> extends AbstractList<E> {
-	
+	/** Initial size of array list */
 	private static final int INIT_SIZE = 10;
-	
+	/** List of elements */
 	private E[] list;
-	
+	/** Number of elements in list */
 	private int size;
 	
 	/**
@@ -25,6 +25,15 @@ public class ArrayList<E> extends AbstractList<E> {
 		size = 0;
 	}
 	
+	/**
+	 * Adds new element to specified index
+	 * @param index Index of list
+	 * @param element Element to add
+	 * @throws NullPointerException if element is null
+	 * @throws IllegalArgumentException if duplicate element found
+	 * @throws IndexOutOfBoundsException if index is less than
+	 * 0 or greater than the size of the list
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void add(int index, E element) {
@@ -81,6 +90,12 @@ public class ArrayList<E> extends AbstractList<E> {
 		list = tempArray;
 		size++;
 	}
+	/**
+	 * Removes element at specified index
+	 * @param index Index of list
+	 * @throws IndexOutOfBoundsException if removing from
+	 * empty list, index of list with null element, or outside bounds
+	 */
 	@Override
 	public E remove(int index) {
 		if (size <= -1) {
@@ -102,6 +117,15 @@ public class ArrayList<E> extends AbstractList<E> {
 		return element;
 		
 	}
+	/**
+	 * Sets the element at the specified index
+	 * @param index Index of list
+	 * @param element Element to set
+	 * @throws NullPointerException if element is null
+	 * @throws IllegalArgumentException if duplicate element found
+	 * @throws IndexOutOfBoundsException if index is less than
+	 * 0 or greater than the size of the list, or size is 0
+	 */
 	@Override
 	public E set(int index, E element) {
 		if (element == null) {
@@ -126,6 +150,12 @@ public class ArrayList<E> extends AbstractList<E> {
 		
 		return temp;
 	}
+	/**
+	 * Gets the element at the specified index
+	 * @param index Index of list
+	 * @throws IndexOutOfBoundsException if index is outside
+	 * the bounds of the list
+	 */
 	@Override
 	public E get(int index) {
 		if (size <= -1) {
@@ -138,6 +168,9 @@ public class ArrayList<E> extends AbstractList<E> {
 		return list[index];
 	}
 
+	/**
+	 * Gets the size of the list
+	 */
 	@Override
 	public int size() {
 		return size;

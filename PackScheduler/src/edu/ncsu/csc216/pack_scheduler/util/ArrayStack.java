@@ -1,5 +1,10 @@
 package edu.ncsu.csc216.pack_scheduler.util;
-
+/**
+ * ArrayList Stack
+ * @author dndereef
+ *
+ * @param <E> Element type of stack
+ */
 public class ArrayStack<E> implements Stack<E> {
 
 	/** ArrayList to store the data*/
@@ -15,7 +20,11 @@ public class ArrayStack<E> implements Stack<E> {
 		this.setCapacity(cap);
 	}
 	
-	
+	/**
+	 * Adds element to stack
+	 * @throws IllegalArgumentException if size 
+	 * reaches capacity
+	 */
 	@Override
 	public void push(E element) {
 		if (list.size() < capacityList) {
@@ -26,21 +35,37 @@ public class ArrayStack<E> implements Stack<E> {
 		}
 	}
 
+	/**
+	 * Removes element from stack
+	 * @return Element removed from stack
+	 */
 	@Override
 	public E pop() {
 		return list.remove(0);
 	}
 
+	/**
+	 * Checks if stack is empty
+	 * @return true if stack is empty
+	 */
 	@Override
 	public boolean isEmpty() {
 		return list.isEmpty();
 	}
 
+	/**
+	 * Gets the size of the stack
+	 * @return Size of the stack
+	 */
 	@Override
 	public int size() {
 		return list.size();
 	}
 
+	/**
+	 * Sets the new capacity of the stack
+	 * @param capacity New capacity of stack
+	 */
 	@Override
 	public void setCapacity(int capacity) {
 		capacityList = capacity;

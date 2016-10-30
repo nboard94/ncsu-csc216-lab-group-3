@@ -245,6 +245,9 @@ public class LinkedAbstractListTest {
 		}
 
 	}
+	/**
+	 * Tests setCapacity
+	 */
 	@Test
 	public void testsetCapacity(){
 		LinkedAbstractList<String> a = new LinkedAbstractList<String>(10);

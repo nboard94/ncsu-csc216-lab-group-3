@@ -67,6 +67,8 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 				this.back = this.front;
 			} else if (front.next == null) {
 				this.front = new ListNode<E>(element, front);
+				front.next = back;
+				back.next = front;
 			} else {
 				this.front = new ListNode<E>(element, front);
 			}
@@ -168,6 +170,12 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 			return temp;
 		}
 	}
+	/**
+	 * Sets the new capacity
+	 * @param capacity
+	 * @throws IllegalArgumentException if new capacity is 
+	 * less than the size of list or negative
+	 */
 	public void setCapacity(int capacity) {
 		if (capacity < size || capacity < 0) {
 			throw new IllegalArgumentException("Capacity must have room for elements.");
