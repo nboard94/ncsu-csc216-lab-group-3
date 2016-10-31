@@ -27,6 +27,14 @@ public class LinkedStackTest {
 		assertEquals(2, stack.size());
 		stack.push("other");
 		assertEquals(3, stack.size());
+		stack.push("four");
+		stack.push("five");
+		try {
+			stack.push("six");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Capacity reached.");
+		}
 	}
 	
 	/**
@@ -43,9 +51,11 @@ public class LinkedStackTest {
 		assertEquals(2, stack.size());
 		stack.push("other");
 		assertEquals(3, stack.size());
+		stack.push("four");
+		stack.push("five");
+		assertEquals("five", stack.pop());
+		assertEquals("four", stack.pop());
 		assertEquals("other", stack.pop());
-		assertEquals("more", stack.pop());
-		assertEquals("word", stack.pop());
 	}
 	/**
 	 * Tests isEmpty

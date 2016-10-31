@@ -1,4 +1,7 @@
 package edu.ncsu.csc216.pack_scheduler.util;
+
+import java.util.EmptyStackException;
+
 /**
  * ArrayList Stack
  * @author dndereef
@@ -42,6 +45,9 @@ public class ArrayStack<E> implements Stack<E> {
 	 */
 	@Override
 	public E pop() {
+		if (list.size() == 0) {
+			throw new EmptyStackException();
+		}
 		return list.remove(list.size() - 1);
 	}
 

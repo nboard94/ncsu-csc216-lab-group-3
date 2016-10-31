@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
+import java.util.EmptyStackException;
+
 /**
  * Linked List Stack
  * @author dndereef
@@ -25,6 +27,9 @@ public class LinkedStack<E> implements Stack<E> {
 	 */
 	@Override
 	public E pop() {
+		if (size() == 0) {
+			throw new EmptyStackException();
+		}
 		return linkedList.remove(size() - 1);
 	}
 
