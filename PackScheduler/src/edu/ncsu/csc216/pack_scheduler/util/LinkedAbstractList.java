@@ -161,9 +161,10 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 			currentNode = currentNode.next;
 		}
 		if (index == 0) {
+			E temp = front.data;
 			front = currentNode.next;
 			size--;
-			return currentNode.data;
+			return temp;
 		} else if(index == size() - 1) {
 			E temp = (E) back.data;
 			back = currentNode;
