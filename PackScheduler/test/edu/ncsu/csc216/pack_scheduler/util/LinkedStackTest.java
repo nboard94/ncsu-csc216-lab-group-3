@@ -2,6 +2,8 @@ package edu.ncsu.csc216.pack_scheduler.util;
 
 import static org.junit.Assert.*;
 
+import java.util.EmptyStackException;
+
 import org.junit.Test;
 /**
  * Tests LinkedStack 
@@ -56,6 +58,14 @@ public class LinkedStackTest {
 		assertEquals("five", stack.pop());
 		assertEquals("four", stack.pop());
 		assertEquals("other", stack.pop());
+		assertEquals("more", stack.pop());
+		assertEquals("word", stack.pop());
+		try {
+			stack.pop();
+			fail();
+		} catch (EmptyStackException e) {
+			assertEquals(0, stack.size());
+		}
 	}
 	/**
 	 * Tests isEmpty

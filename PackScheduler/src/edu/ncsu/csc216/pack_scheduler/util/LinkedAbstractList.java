@@ -164,17 +164,17 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 			front = currentNode.next;
 			size--;
 			return currentNode.data;
-		} else if(index == size()){
-			for (int k = 0; k < index - 1; k++) {
-				currentNode = currentNode.next;
-			}
-			E temp = (E) currentNode.next.data;
-			currentNode.next = null;
+		} else if(index == size() - 1) {
+			E temp = (E) back.data;
+			back = currentNode;
 			size--;
 			return temp;
 			
 		}
 		else {
+			for (int k = 0; k < index - 1; k++) {
+				currentNode = currentNode.next;
+			}
 			E temp = (E) currentNode.next.data;
 			currentNode.next = currentNode.next.next;
 			size--;
