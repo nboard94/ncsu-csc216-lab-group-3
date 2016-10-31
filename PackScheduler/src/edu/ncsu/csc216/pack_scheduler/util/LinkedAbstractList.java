@@ -71,7 +71,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 				this.front = new ListNode<E>(element, front);
 			}
 		} else if(i == size){
-			this.back.next = new ListNode<E>(element, currentNode);
+			this.back.next = new ListNode<E>(element, null);
 			this.back = this.back.next;
 		} else {
 			for (int k = 0; k < i - 1; k++) {

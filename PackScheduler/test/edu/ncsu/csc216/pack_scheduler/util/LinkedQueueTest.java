@@ -43,7 +43,8 @@ public class LinkedQueueTest {
 	public void testDequeue() {
 		LinkedQueue<String> q = new LinkedQueue<String>(MAX_CAP);
 		q.enqueue("one");
-		q.dequeue();
+		assertEquals("one", q.linkedList.get(0));
+		assertEquals("one", q.dequeue());
 		assertEquals(0, q.size());
 		
 		try {
@@ -55,17 +56,25 @@ public class LinkedQueueTest {
 		q.enqueue("two");
 		q.enqueue("three");
 		q.enqueue("four");
-		assertEquals(3, q.size());
+		q.enqueue("five");
+		assertEquals(4, q.size());
 		assertEquals("two", q.dequeue());
-		assertEquals(2, q.size());
+		assertEquals("three", q.linkedList.get(0));
+		assertEquals(3, q.size());
 		
 		assertEquals("three", q.dequeue());
-		assertEquals(1, q.size());
+		assertEquals("four", q.linkedList.get(0));
+		assertEquals(2, q.size());
 		
-		q.enqueue("five");
 		assertEquals("four", q.dequeue());
 		assertEquals(1, q.size());
 		assertEquals("five", q.dequeue());
+		
+		q.enqueue("two");
+		q.enqueue("three");
+		assertEquals("two", q.dequeue());
+		q.enqueue("four");
+		assertEquals("three", q.dequeue());
 	}
 
 	/**
