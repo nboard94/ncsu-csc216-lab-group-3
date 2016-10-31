@@ -34,7 +34,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		public LinkedListIterator(int index) { 
 			if(index < 0 || index > size )
 				throw new IndexOutOfBoundsException();
-			ListNode current = front;
+			ListNode current = front.next;
 			for(int i = 0; i < index; i++){
 			current = current.next;
 			}
@@ -51,13 +51,17 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 				throw new NullPointerException();
 		
 			if(size == 0){
-				ListNode lN = new ListNode(arg0, front, back);
+				ListNode lN = new ListNode(arg0, previous, next);
+				front.next = lN;
+				back.prev = lN;
+					
 			} else{
 				ListNode lN = new ListNode(arg0, previous, next);
 				previous.next = lN;
 				next.prev = lN;
 			}
 			lastRetrieved = null;
+			size++;
 		}
 
 		@Override
@@ -116,9 +120,10 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 * @param data data to store in the node
 		 * @param next reference to the next node
 		 */
-		public ListNode(E data, ListNode prev, ListNode next) {
+		public ListNode(E data, ListNode previous, ListNode next1) {
 			this.data = data;
-			this.next = next;
+			this.next = next1;
+			this.prev = previous;
 		}
 		
 	}

@@ -71,21 +71,21 @@ public class LinkedListTest {
 		assertEquals(1, list.size());
 		
 		list.add("b");	// add to beginning of array
-		assertEquals("b", list.get(0));
-		assertEquals("a", list.get(1));
+		assertEquals("b", list.get(1));
+		assertEquals("a", list.get(0));
 		assertEquals(2, list.size());
 		
 		list.add("c");	// add to end of array
-		assertEquals("b", list.get(0));
-		assertEquals("a", list.get(1));
+		assertEquals("b", list.get(1));
+		assertEquals("a", list.get(0));
 		assertEquals("c", list.get(2));
 		assertEquals(3, list.size());
 		
-		list.add(1, "d");	// add to middle of array
-		assertEquals("b", list.get(0));
-		assertEquals("d", list.get(1));
-		assertEquals("a", list.get(2));
-		assertEquals("c", list.get(3));
+		list.add("d");	// add to middle of array
+		assertEquals("b", list.get(1));
+		assertEquals("d", list.get(3));
+		assertEquals("a", list.get(0));
+		assertEquals("c", list.get(2));
 		assertEquals(4, list.size());
 		
 		//try to add 11 elements
