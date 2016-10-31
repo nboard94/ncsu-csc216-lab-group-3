@@ -7,19 +7,19 @@ import org.junit.Test;
 
 public class LinkedListTest {
 	/**
-	 * test for constructor
+	 * test for  constructor
 	 */
 	@Test
 	public void testConstructor() {
-		ArrayList<String> a = new ArrayList<String>();
+		LinkedList<String> a = new LinkedList<String>();
 		assertEquals(0, a.size());
 	}
 	/**
-	 * test method for the set method of arrayList
+	 * test method for the set method of LinkedList
 	 */
 	@Test
 	public void testSet(){
-		ArrayList<String> a = new ArrayList<String>();
+		LinkedList<String> a = new LinkedList<String>();
 		try{
 			a.set(0, "test");
 			fail();
@@ -64,18 +64,18 @@ public class LinkedListTest {
 	@Test
 	public void testAdd() {
 		// test valid add cases
-		ArrayList<String> list = new ArrayList<String>();
+		LinkedList<String> list = new LinkedList<String>();
 		
-		list.add(0, "a");	// add to empty array
+		list.add("a");	// add to empty array
 		assertEquals("a", list.get(0));
 		assertEquals(1, list.size());
 		
-		list.add(0, "b");	// add to beginning of array
+		list.add("b");	// add to beginning of array
 		assertEquals("b", list.get(0));
 		assertEquals("a", list.get(1));
 		assertEquals(2, list.size());
 		
-		list.add(2, "c");	// add to end of array
+		list.add("c");	// add to end of array
 		assertEquals("b", list.get(0));
 		assertEquals("a", list.get(1));
 		assertEquals("c", list.get(2));
@@ -153,7 +153,7 @@ public class LinkedListTest {
 	@Test
 	public void testRemove() {
 		//remove the element at index 0
-		ArrayList<String> a = new ArrayList<String>();
+		LinkedList<String> a = new LinkedList<String>();
 		assertEquals(0, a.size());
 		a.add(0, "Apple");
 		a.add(1, "Grape");
@@ -162,7 +162,7 @@ public class LinkedListTest {
 		assertEquals("Grape", a.get(0));
 		
 		//remove the element in middle
-		a = new ArrayList<String>();
+		a = new LinkedList<String>();
 		assertEquals(0, a.size());
 		a.add(0, "Apple");
 		a.add(1, "Grape");
@@ -173,7 +173,7 @@ public class LinkedListTest {
 		assertEquals("Orange", a.get(1));
 		
 		//remove the element in the end
-		a = new ArrayList<String>();
+		a = new LinkedList<String>();
 		assertEquals(0, a.size());
 		a.add(0, "Apple");
 		a.add(1, "Grape");
@@ -184,7 +184,7 @@ public class LinkedListTest {
 		assertEquals("Grape", a.get(1));
 		
 		//remove the element at invalid index
-		a = new ArrayList<String>();
+		a = new LinkedList<String>();
 		assertEquals(0, a.size());
 		a.add(0, "Apple");
 		a.add(1, "Grape");
@@ -202,7 +202,7 @@ public class LinkedListTest {
 		}
 		
 		//remove element from empty list
-		a = new ArrayList<String>();
+		a = new LinkedList<String>();
 		assertEquals(0, a.size());
 		try{
 			a.remove(0);
@@ -211,11 +211,11 @@ public class LinkedListTest {
 		}
 	}
 	/**
-	 * test method for the get method of arrayList
+	 * test method for the get method of LinkedList
 	 */
 	@Test
 	public void testGet(){
-		ArrayList<String> a = new ArrayList<String>();
+		LinkedList<String> a = new LinkedList<String>();
 		a.add(0, "test");
 		a.add(0, "string");
 		a.add(0, "words");
