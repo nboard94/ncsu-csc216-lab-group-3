@@ -2,11 +2,22 @@ package edu.ncsu.csc216.pack_scheduler.util;
 
 import java.util.AbstractSequentialList;
 import java.util.ListIterator;
-
+import java.util.NoSuchElementException;
+/**
+ * Collection class for faculty implementation
+ * @author dndereef, ajstrapp
+ *
+ * @param <E> Element type of list
+ */
 public class LinkedList<E> extends AbstractSequentialList<E> {
-	ListNode front, back;
-	int size;
+	/** Beginning of list and end of list */
+	private ListNode front, back;
+	/** Number of elements in list */
+	private int size;
 	
+	/**
+	 * Constructor for LinkedList
+	 */
 	public LinkedList(){
 		front = new ListNode(null,null,null);
 		back = new ListNode(null,front,null);
@@ -15,22 +26,53 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		size = 0;
 		
 	}
+	
+	/**
+	 * Iterator constructor
+	 */
 	@Override
 	public ListIterator<E> listIterator(int arg0) {
 		LinkedListIterator listIter = new LinkedListIterator(arg0);
 		return listIter;
 	}
 
+	/** 
+	 * Adds the element to specified index
+	 */
+	@Override
+	public void add(int index, E element) {
+		// Should throw IllegalArgumentException for duplicate element
+		for (int i = 0; i < size(); i++) {
+			if (element.equals(get(i))) {
+				throw new IllegalArgumentException();
+			}
+		}
+		super.add(index, element);
+	}
+	
+	/**
+	 * Gets the size of the list
+	 */
 	@Override
 	public int size() {
 		return size;
 	}
 	
+	/**
+	 * Iterator class
+	 * @author dndereef
+	 *
+	 */
 	private class LinkedListIterator implements ListIterator<E> {
-
+		/** The previous element, the next element, and the last obtained element */
 		public ListNode previous, next, lastRetrieved;
+		/** Indexes of previous and next elements */
 		public int previousIndex, nextIndex;
 		
+		/**
+		 * Positions the iterator at desired node in list
+		 * @param index
+		 */
 		public LinkedListIterator(int index) { 
 			if(index < 0 || index > size )
 				throw new IndexOutOfBoundsException();
@@ -45,6 +87,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			lastRetrieved = null;
 		}
 
+		/**
+		 * Iterator adds desired element
+		 */
 		@Override
 		public void add(E arg0) {
 			if(arg0 == null)
@@ -64,42 +109,80 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			size++;
 		}
 
+		/**
+		 * Checks if the next element is null
+		 * @returns true if the element is not null
+		 */
 		@Override
 		public boolean hasNext() {
 			return next != null;
 		}
 
+		/**
+		 * Checks if the previous element is null
+		 * @return True if the element is not null
+		 */
 		@Override
 		public boolean hasPrevious() {
 			return previous != null;
 		}
 
+		/**
+		 * Gets the next element
+		 * @return The next element in the list
+		 */
 		@Override
 		public E next() {
-			return next.data;
+			if (next == null) {
+				throw new NoSuchElementException();
+			}
+			lastRetrieved = next;
+			return lastRetrieved.data;
 		}
 
+		/**
+		 * Gets the next element's index
+		 * @return The index of the next element
+		 */
 		@Override
 		public int nextIndex() {
 			return nextIndex;
 		}
 
+		/**
+		 * Gets the previous element
+		 * @return The previous element
+		 */
 		@Override
 		public E previous() {
-			return previous.data;
+			if (previous == null) {
+				throw new NoSuchElementException();
+			}
+			lastRetrieved = previous;
+			return lastRetrieved.data;
 		}
 
+		/**
+		 * Gets the index of the previous element
+		 * @return The previous element's index
+		 */
 		@Override
 		public int previousIndex() {
 			return previousIndex;
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public void remove() {
 			// TODO Auto-generated method stub
 			
 		}
 
+		/**
+		 * 
+		 */
 		@Override
 		public void set(E arg0) {
 			// TODO Auto-generated method stub
@@ -108,6 +191,11 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		
 	}
 	
+	/**
+	 * Individual node in the LinkedList
+	 * @author dndereef
+	 *
+	 */
 	private class ListNode {
 		/** The information being stored in the node */
 		public E data;

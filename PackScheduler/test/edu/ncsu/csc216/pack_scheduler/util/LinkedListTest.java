@@ -104,10 +104,10 @@ public class LinkedListTest {
 		assertEquals("g", list.get(4));
 		assertEquals("f", list.get(5));
 		assertEquals("e", list.get(6));
-		assertEquals("b", list.get(7));
-		assertEquals("d", list.get(8));
-		assertEquals("a", list.get(9));
-		assertEquals("c", list.get(10));
+		assertEquals("a", list.get(7));
+		assertEquals("b", list.get(8));
+		assertEquals("c", list.get(9));
+		assertEquals("d", list.get(10));
 
 		
 		// test invalid add cases
