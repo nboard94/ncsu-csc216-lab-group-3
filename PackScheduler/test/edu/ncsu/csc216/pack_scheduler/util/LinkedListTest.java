@@ -18,34 +18,31 @@ public class LinkedListTest {
 	 * test method for the set method of LinkedList
 	 */
 	@Test
-	public void testSet(){
+	public void testSet() {
 		LinkedList<String> a = new LinkedList<String>();
+		a.listIterator().add("one");
 		try{
-			a.set(0, "test");
+			a.listIterator().set("test");
 			fail();
-		} catch(IndexOutOfBoundsException E) {
-			assertEquals(a.size(), 0);
+		} catch(IllegalStateException E) {
+			assertEquals(1, a.size());
 		}
+		a.listIterator().next();
 		try{
-			a.set(5, "test");
-			fail();
-		} catch(IndexOutOfBoundsException E) {
-			assertEquals(a.size(), 0);
-		}
-		try{
-			a.set(0, null);
+			a.listIterator().set(null);
 			fail();
 		} catch(NullPointerException E) {
-			assertEquals(a.size(), 0);
+			assertEquals(1, a.size());
 		}
 		
 		a.add(0, "test");
-		assertEquals(a.size(), 1);
+		assertEquals(2, a.size());
+		a.listIterator().next();
 		try{
 			a.set(1, "test");
 			fail();
 		} catch(IllegalArgumentException E) {
-			assertEquals(a.size(), 1);
+			assertEquals(2, a.size());
 		}
 		
 		a.add(0, "string");
@@ -53,10 +50,11 @@ public class LinkedListTest {
 		assertEquals(a.get(0), "words");
 		assertEquals(a.get(1), "string");
 		assertEquals(a.get(2), "test");
+		assertEquals(a.get(3), "one");
 		a.set(0, "other");
-		assertEquals(a.get(0), "other");
+		assertEquals("other", a.get(0));
 		a.set(1, "letters");
-		assertEquals(a.get(1), "letters");
+		assertEquals("letters", a.get(1));
 	}
 	/**
 	 * test for add method

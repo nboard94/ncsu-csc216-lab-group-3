@@ -60,6 +60,11 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	@Override
 	public E set(int index, E element) {
 		// TODO Auto-generated method stub
+		for (int i = 0; i < size(); i++) {
+			if (element.equals(get(i))) {
+				throw new IllegalArgumentException();
+			}
+		}
 		return super.set(index, element);
 	}
 
@@ -193,7 +198,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (lastRetrieved == null) {
 				throw new IllegalStateException();
 			}
-			
+			lastRetrieved = null;
+			size--;
 		}
 
 		/**
@@ -202,12 +208,13 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public void set(E element) {
-			if (lastRetrieved == null) {
-				throw new IllegalStateException();
-			}
 			if (element == null) {
 				throw new NullPointerException();
 			}
+			if (lastRetrieved == null) {
+				throw new IllegalStateException();
+			}
+			
 			ListNode lR = new ListNode(element, previous, next);
 			lastRetrieved = lR;
 		} 
