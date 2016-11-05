@@ -38,6 +38,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 
 	/** 
 	 * Adds the element to specified index
+	 * @param index Index of list
+	 * @param element Element to add
 	 */
 	@Override
 	public void add(int index, E element) {
@@ -50,6 +52,17 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		super.add(index, element);
 	}
 	
+	/**
+	 * Sets the element to the specified index
+	 * @param index Index of list
+	 * @param element Element to set
+	 */
+	@Override
+	public E set(int index, E element) {
+		// TODO Auto-generated method stub
+		return super.set(index, element);
+	}
+
 	/**
 	 * Gets the size of the list
 	 */
@@ -172,21 +185,31 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		}
 
 		/**
-		 * 
+		 * Removes the last retrieved element
 		 */
 		@Override
 		public void remove() {
 			// TODO Auto-generated method stub
+			if (lastRetrieved == null) {
+				throw new IllegalStateException();
+			}
 			
 		}
 
 		/**
-		 * 
+		 * Replaces the last retrieved element
+		 * @param element The new element
 		 */
 		@Override
-		public void set(E arg0) {
-			// TODO Auto-generated method stub
-			
+		public void set(E element) {
+			if (lastRetrieved == null) {
+				throw new IllegalStateException();
+			}
+			if (element == null) {
+				throw new NullPointerException();
+			}
+			ListNode lR = new ListNode(element, previous, next);
+			lastRetrieved = lR;
 		} 
 		
 	}
