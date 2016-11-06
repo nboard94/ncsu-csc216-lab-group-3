@@ -155,6 +155,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 				throw new NoSuchElementException();
 			}
 			lastRetrieved = next;
+			next = next.next;
 			return lastRetrieved.data;
 		}
 
@@ -198,6 +199,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (lastRetrieved == null) {
 				throw new IllegalStateException();
 			}
+			lastRetrieved.prev = lastRetrieved.next;
 			lastRetrieved = null;
 			size--;
 		}
@@ -217,6 +219,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			
 			ListNode lR = new ListNode(element, previous, next);
 			lastRetrieved = lR;
+			
 		} 
 		
 	}
@@ -231,12 +234,14 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		public E data;
 		/** Reference to the next node in the list */
 		public ListNode next;
+		/** Reference to the previous node in the list */
 		public ListNode prev;
 		/**
 		 * Constructs a new ListNode
 		 * 
 		 * @param data data to store in the node
-		 * @param next reference to the next node
+		 * @param previous reference to previous node
+		 * @param next1 reference to the next node
 		 */
 		public ListNode(E data, ListNode previous, ListNode next1) {
 			this.data = data;

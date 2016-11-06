@@ -51,7 +51,13 @@ public class LinkedListTest {
 		assertEquals(a.get(1), "string");
 		assertEquals(a.get(2), "test");
 		assertEquals(a.get(3), "one");
-		a.set(0, "other");
+		assertEquals(-1, a.listIterator().previousIndex());
+		assertEquals(0, a.listIterator().nextIndex());
+		assertEquals("words", a.listIterator().next());
+		// Test traversal through list
+		assertEquals(0, a.listIterator().previousIndex());
+		assertEquals(1, a.listIterator().nextIndex());
+		a.listIterator().set("other");
 		assertEquals("other", a.get(0));
 		a.set(1, "letters");
 		assertEquals("letters", a.get(1));
