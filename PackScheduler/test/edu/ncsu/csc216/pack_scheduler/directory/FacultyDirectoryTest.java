@@ -66,7 +66,7 @@ public class FacultyDirectoryTest {
 		FacultyDirectory fd = new FacultyDirectory();
 		
 		fd.loadFacultyFromFile(validTestFile);
-		assertEquals(10, fd.getFacultyDirectory().length);
+		assertEquals(8, fd.getFacultyDirectory().length);
 		
 		fd.newFacultyDirectory();
 		assertEquals(0, fd.getFacultyDirectory().length);
@@ -81,7 +81,7 @@ public class FacultyDirectoryTest {
 				
 		//Test valid file
 		fd.loadFacultyFromFile(validTestFile);
-		assertEquals(10, fd.getFacultyDirectory().length);
+		assertEquals(8, fd.getFacultyDirectory().length);
 		
 		//Test invalid file
 		String invalidFile = "invalidstudents.txt";
@@ -110,14 +110,14 @@ public class FacultyDirectoryTest {
 		//Test valid Faculty
 		sd.addFaculty(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_COURSES);
 		assertFalse(sd.addFaculty(FIRST_NAME, LAST_NAME, ID, EMAIL, PASSWORD, PASSWORD, MAX_COURSES));
-		String [][] studentDirectory = sd.getFacultyDirectory();
-		assertEquals(1, studentDirectory.length);
-		assertEquals(FIRST_NAME, studentDirectory[0][0]);
-		assertEquals(LAST_NAME, studentDirectory[0][1]);
-		assertEquals(ID, studentDirectory[0][2]);
+		String [][] facultyDirectory = sd.getFacultyDirectory();
+		assertEquals(1, facultyDirectory.length);
+		assertEquals(FIRST_NAME, facultyDirectory[0][0]);
+		assertEquals(LAST_NAME, facultyDirectory[0][1]);
+		assertEquals(ID, facultyDirectory[0][2]);
 		assertTrue(sd.addFaculty(FIRST_NAME, LAST_NAME, "other_id", EMAIL, PASSWORD, PASSWORD, MAX_COURSES));
 		
-		//Test invalid student with invalid password
+		//Test invalid faculty with invalid password
 		try {
 			sd.addFaculty(FIRST_NAME, LAST_NAME, ID, EMAIL, null, PASSWORD, MAX_COURSES);
 		} catch (IllegalArgumentException e) {
@@ -152,15 +152,15 @@ public class FacultyDirectoryTest {
 	public void testRemoveFaculty() {
 		FacultyDirectory sd = new FacultyDirectory();
 				
-		//Add students and remove
+		//Add faculty and remove
 		sd.loadFacultyFromFile(validTestFile);
-		assertEquals(10, sd.getFacultyDirectory().length);
-		assertTrue(sd.removeFaculty("efrost"));
-		String [][] studentDirectory = sd.getFacultyDirectory();
-		assertEquals(9, studentDirectory.length);
-		assertEquals("Zahir", studentDirectory[5][0]);
-		assertEquals("King", studentDirectory[5][1]);
-		assertEquals("zking", studentDirectory[5][2]);
+		assertEquals(8, sd.getFacultyDirectory().length);
+		assertTrue(sd.removeFaculty("lwalls"));
+		String [][] facultyDirectory = sd.getFacultyDirectory();
+		assertEquals(7, facultyDirectory.length);
+		assertEquals("Ashely", facultyDirectory[0][0]);
+		assertEquals("Witt", facultyDirectory[0][1]);
+		assertEquals("awitt", facultyDirectory[0][2]);
 	}
 
 	/**
@@ -171,10 +171,12 @@ public class FacultyDirectoryTest {
 		FacultyDirectory sd = new FacultyDirectory();
 		
 		//Add a student
-		sd.addFaculty("Zahir", "King", "zking", "orci.Donec@ametmassaQuisque.com", "pw", "pw", 15);
+		sd.addFaculty("Ashely", "Witt", "awitt", "mollis@Fuscealiquetmagna.net", "pw", "pw", 2);
 		assertEquals(1, sd.getFacultyDirectory().length);
-		sd.saveFacultyDirectory("test-files/actual_student_records.txt");
-		checkFiles("test-files/expected_student_records.txt", "test-files/actual_student_records.txt");
+		sd.addFaculty("Fiona", "Meadows", "fmeadow", "pharetra.sed@et.org", "pw", "pw", 3);
+		sd.addFaculty("Brent", "Brewer", "bbrewer", "sem.semper@orcisem.co.uk", "pw", "pw", 1);
+		sd.saveFacultyDirectory("test-files/actual_faculty_record.txt");
+		checkFiles("test-files/expected_faculty_records.txt", "test-files/actual_faculty_record.txt");
 		
 		//Writing to invalid file
 		String invalidPath = "test-invalid/invalidtest.txt";

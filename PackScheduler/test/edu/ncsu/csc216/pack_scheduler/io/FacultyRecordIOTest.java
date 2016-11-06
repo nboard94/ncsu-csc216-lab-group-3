@@ -2,9 +2,12 @@ package edu.ncsu.csc216.pack_scheduler.io;
 
 import static org.junit.Assert.*;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +18,7 @@ import edu.ncsu.csc216.pack_scheduler.util.LinkedList;
 public class FacultyRecordIOTest {
 
 	/** Valid faculty records */
-	private final String validTestFile = "test-files/falculty_records.txt";
+	private final String validTestFile = "test-files/faculty_records.txt";
 	/** Invalid faculty records */
 	private final String invalidTestFile = "test-files/invalid_faculty_records.txt";
 
@@ -94,5 +97,59 @@ public class FacultyRecordIOTest {
 		}
 
 		
+	}
+	
+	/**
+	 * Tests writeFacultyRecords
+	 */
+	@Test
+	public void testWriteFacultyRecords() {
+		LinkedList<Faculty> f = new LinkedList<Faculty>();
+		try {
+			f = FacultyRecordIO.readFacultyRecords(validTestFile);
+		} catch (FileNotFoundException e1) {
+			fail();
+		}
+		// Assumption that you are using a hash of "pw" stored in hashPW
+
+		try {
+			FacultyRecordIO.writeFacultyRecords("test-files/actual_faculty_records.txt", f);
+		} catch (IOException e) {
+			fail();
+		}
+
+		checkFiles("test-files/expected_full_faculty_records.txt", "test-files/actual_faculty_records.txt");
+	}
+
+	/**
+	 * Helper method to compare two files for the same contents.
+	 * 
+	 * @param expFile
+	 *            expected file output
+	 * @param actFile
+	 *            actual file output
+	 */
+	private void checkFiles(String expFile, String actFile) {
+		try {
+			Scanner expScanner = new Scanner(new FileInputStream(expFile));
+			Scanner actScanner = new Scanner(new FileInputStream(actFile));
+
+			while (expScanner.hasNextLine() && actScanner.hasNextLine()) {
+				String exp = expScanner.nextLine();
+				String act = actScanner.nextLine();
+				assertEquals("Expected: " + exp + " Actual: " + act, exp, act);
+			}
+			if (expScanner.hasNextLine()) {
+				fail("The expected results expect another line " + expScanner.nextLine());
+			}
+			if (actScanner.hasNextLine()) {
+				fail("The actual results has an extra, unexpected line: " + actScanner.nextLine());
+			}
+
+			expScanner.close();
+			actScanner.close();
+		} catch (IOException e) {
+			fail("Error reading files.");
+		}
 	}
 }
