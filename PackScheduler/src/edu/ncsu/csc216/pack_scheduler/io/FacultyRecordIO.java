@@ -45,8 +45,7 @@ public class FacultyRecordIO {
 					}				
 				}
 			} catch (IllegalArgumentException e) {
-				fileReader.close();
-				throw new IllegalArgumentException(e);
+
 			}
 		}
 		fileReader.close();
