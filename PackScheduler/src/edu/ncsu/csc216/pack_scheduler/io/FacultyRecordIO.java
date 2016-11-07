@@ -29,7 +29,7 @@ public class FacultyRecordIO {
 		Scanner fileReader = new Scanner(new FileInputStream(fileName));
 		LinkedList<Faculty> facultyRecord = new LinkedList<Faculty>();
 		while(fileReader.hasNextLine()){
-			try{
+
 				Faculty faculty = proceedFaculty(fileReader.nextLine());
 				if (faculty != null) {
 					boolean duplicate = false;
@@ -44,9 +44,7 @@ public class FacultyRecordIO {
 						facultyRecord.add(faculty);
 					}				
 				}
-			} catch (IllegalArgumentException e) {
-
-			}
+			
 		}
 		fileReader.close();
 		return facultyRecord;
