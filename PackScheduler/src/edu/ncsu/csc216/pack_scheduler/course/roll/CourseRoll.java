@@ -78,11 +78,11 @@ public class CourseRoll {
 				throw new IllegalArgumentException("Waitlist is full.");
 			}
 		} else {
-			try{
+//			try{
 				roll.add(roll.size(), s);
-			} catch(Exception E) {
-				throw new IllegalArgumentException();
-			}
+//			} catch(Exception E) {
+//				throw new IllegalArgumentException();
+//			}
 		}
 	}
 	/**
