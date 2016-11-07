@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import edu.ncsu.csc216.pack_scheduler.catalog.CourseCatalog;
 import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.course.roll.CourseRoll;
+import edu.ncsu.csc216.pack_scheduler.directory.FacultyDirectory;
 import edu.ncsu.csc216.pack_scheduler.directory.StudentDirectory;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 import edu.ncsu.csc216.pack_scheduler.user.User;
@@ -19,22 +20,24 @@ import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
  *
  */
 public class RegistrationManager {
-
+	/** Instance of RegistrationManager */
 	private static RegistrationManager instance;
-	
+	/** List of courses */
 	private CourseCatalog courseCatalog;
-	
+	/** List of students */
 	private StudentDirectory studentDirectory;
-	
+	/** List of faculty */
+	private FacultyDirectory facultyDirectory;
+	/** Manager of school records */
 	private User registrar;
-	
+	/** The user currently logged into the system */
 	private User currentUser;
 	
 	/** Hashing algorithm */
 	private static final String HASH_ALGORITHM = "SHA-256";
-	
+	/** Password for Registrar*/
 	private static final String PW = "Regi5tr@r";
-	
+	/** Hashed password */
 	private static String hashPW;
 
 	// Static code block for hashing the registrar user's password
@@ -48,9 +51,13 @@ public class RegistrationManager {
 		}
 	}
 
+	/**
+	 * Initializes fields for instance
+	 */
 	private RegistrationManager() {
 		courseCatalog = new CourseCatalog();
 		studentDirectory = new StudentDirectory();
+		facultyDirectory = new FacultyDirectory();
 		registrar = new Registrar();
 	}
 	
@@ -82,6 +89,13 @@ public class RegistrationManager {
 	}
 
 	/**
+	 * Gets faculty directory
+	 * @return facultyDirectory List of faculty
+	 */
+	public FacultyDirectory getFacultyDirectory() {
+		return facultyDirectory;
+	}
+	/**
 	 * login in a user
 	 * check local hashed password and the one has already hashed in file
 	 * @param id student's id
@@ -112,9 +126,11 @@ public class RegistrationManager {
 				throw new IllegalArgumentException();
 			}
 		} else {
-			Student s = studentDirectory.getStudentById(id);
-			if(s == null){
-				throw new IllegalArgumentException("User doesn't exist.");
+			User s = studentDirectory.getStudentById(id);
+			if(s == null) {
+				s = facultyDirectory.getFacultyById(id);
+				if (s == null)
+					throw new IllegalArgumentException("User doesn't exist.");
 			}
 			try {
 				MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);

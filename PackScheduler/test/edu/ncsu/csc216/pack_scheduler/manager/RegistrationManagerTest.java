@@ -94,6 +94,12 @@ public class RegistrationManagerTest {
 		manager.logout();
 		assertFalse(manager.login("registrar", null));
 		assertFalse(manager.login(null, "password"));
+		
+		manager.clearData();
+		manager.getFacultyDirectory().loadFacultyFromFile("test-files/faculty_records.txt");
+		assertFalse(manager.login("awitt", "password"));
+		manager.getFacultyDirectory().addFaculty("Devonte", "Dereef", "dndereef", "dndereef@ncsu.edu", "pw", "pw", 3);
+		assertTrue(manager.login("dndereef", "pw"));
 	}
 
 	/**
