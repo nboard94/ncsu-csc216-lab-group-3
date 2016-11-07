@@ -230,8 +230,10 @@ public boolean dropStudentFromCourse(Course c) {
     }
     try {
         Student s = (Student)currentUser;
+    	if(s.canAdd(c))
+    		throw new IllegalArgumentException();
         c.getCourseRoll().drop(s);
-        return true; //s.getSchedule().removeCourseFromSchedule(c);
+        return true;
     } catch (IllegalArgumentException e) {
         return false; 
     }
