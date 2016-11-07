@@ -88,8 +88,8 @@ public class CourseRoll {
 				throw new IllegalArgumentException("Waitlist is full.");
 			}
 		} else {
-			s.getSchedule().addCourseToSchedule(course);
-				roll.add(roll.size(), s);
+			//s.getSchedule().addCourseToSchedule(course);
+			roll.add(roll.size(), s);
 		}
 	}
 	/**
@@ -104,7 +104,7 @@ public class CourseRoll {
 				try{
 					roll.remove(i);
 					if (!waitlist.isEmpty())
-						enroll(waitlist.dequeue());
+						roll.add(roll.size(), waitlist.dequeue());
 				} catch(IndexOutOfBoundsException E) {
 					throw new IllegalArgumentException();
 				}
