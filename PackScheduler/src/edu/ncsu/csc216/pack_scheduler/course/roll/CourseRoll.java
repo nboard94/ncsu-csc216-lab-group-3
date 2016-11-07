@@ -88,7 +88,7 @@ public class CourseRoll {
 				throw new IllegalArgumentException("Waitlist is full.");
 			}
 		} else {
-			//s.getSchedule().addCourseToSchedule(course);
+			s.getSchedule().addCourseToSchedule(course);
 			roll.add(roll.size(), s);
 		}
 	}
