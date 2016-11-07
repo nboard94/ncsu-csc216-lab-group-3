@@ -106,6 +106,12 @@ public class RegistrationManager {
 		if(id == null || password == null){
 			return false;
 		}
+		if(studentDirectory == null){
+			return false;
+		}
+		if(currentUser != null){
+			return false;
+		}
 		if (registrar.getId().equals(id)) {
 			MessageDigest digest;
 			try {
@@ -137,12 +143,6 @@ public class RegistrationManager {
 			} catch (NoSuchAlgorithmException e) {
 				throw new IllegalArgumentException();
 			}
-		}
-		if(studentDirectory == null){
-			return false;
-		}
-		if(currentUser != null){
-			return false;
 		}
 		return false;
 	}
