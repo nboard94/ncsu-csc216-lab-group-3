@@ -104,7 +104,7 @@ public class CourseRoll {
 		for(int i = 0; i < roll.size(); i++){
 			if(roll.get(i).equals(s))
 				try{
-					roll.remove(i);
+					roll.remove(i).getSchedule().removeCourseFromSchedule(course);
 					if (!waitlist.isEmpty())
 						enroll( waitlist.dequeue());
 				} catch(IndexOutOfBoundsException E) {
