@@ -48,10 +48,13 @@ public class CourseRoll {
 	 * @param i new enrollment cap that wants to be set
 	 */
 	public void setEnrollmentCap(int i){
-		if(roll == null && i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT)
-			enrollmentCap = i;
-		if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT)
-			if(roll != null && roll.size() <= i)
+		if(roll == null)
+			if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT)
+				enrollmentCap = i;
+			else 
+				throw new IllegalArgumentException();
+		else if(roll != null)
+			if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT && roll.size() <= i)
 				enrollmentCap = i;
 			else
 				throw new IllegalArgumentException();
