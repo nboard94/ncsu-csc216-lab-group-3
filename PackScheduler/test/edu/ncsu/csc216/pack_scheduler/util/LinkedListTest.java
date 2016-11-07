@@ -1,7 +1,8 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+
+import java.util.ListIterator;
 
 import org.junit.Test;
 
@@ -53,11 +54,14 @@ public class LinkedListTest {
 		assertEquals(a.get(3), "one");
 		assertEquals(-1, a.listIterator().previousIndex());
 		assertEquals(0, a.listIterator().nextIndex());
-		assertEquals("words", a.listIterator().next());
-		// Test traversal through list
-		assertEquals(0, a.listIterator().previousIndex());
-		assertEquals(1, a.listIterator().nextIndex());
-		a.listIterator().set("other");
+		
+		ListIterator<String> b = a.listIterator();
+		assertEquals("words", b.next());
+		
+		assertEquals(0, b.previousIndex());
+		assertEquals(1, b.nextIndex());
+		
+		b.set("other");
 		assertEquals("other", a.get(0));
 		a.set(1, "letters");
 		assertEquals("letters", a.get(1));
@@ -218,7 +222,7 @@ public class LinkedListTest {
 	 * test method for the get method of LinkedList
 	 */
 	@Test
-	public void testGet(){
+	public void testGet() {
 		LinkedList<String> a = new LinkedList<String>();
 		a.add(0, "test");
 		a.add(0, "string");
@@ -233,6 +237,27 @@ public class LinkedListTest {
 		} catch(IndexOutOfBoundsException E) {
 			assertEquals(a.size(), 3);
 		}
-
+	}
+	
+	/**
+	 * Tests custom iterator 
+	 */
+	@Test
+	public void testIterator() {
+		LinkedList<String> a = new LinkedList<String>();
+		a.listIterator().add("one");
+		a.listIterator().add("two");
+		a.listIterator().add("three");
+		a.listIterator().add("four");
+		assertEquals(4, a.size());
+		ListIterator<String> b = a.listIterator();
+		assertEquals(-1, b.previousIndex());
+		assertEquals(0, b.nextIndex());
+		assertFalse(b.hasPrevious());
+		assertTrue(b.hasNext());
+		
+		b.next();
+		assertEquals(0, b.previousIndex());
+		assertEquals(1, b.nextIndex());
 	}
 }

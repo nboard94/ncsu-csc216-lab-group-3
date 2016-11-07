@@ -96,7 +96,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 				throw new IndexOutOfBoundsException();
 			ListNode current = front.next;
 			for(int i = 0; i < index; i++){
-			current = current.next;
+				current = current.next;
 			}
 			next = current;
 			previous = current.prev;
@@ -133,7 +133,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public boolean hasNext() {
-			return next != null;
+			return next.data != null;
 		}
 
 		/**
@@ -142,7 +142,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public boolean hasPrevious() {
-			return previous != null;
+			return previous.data != null;
 		}
 
 		/**
@@ -151,11 +151,15 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public E next() {
-			if (next == null) {
+			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
+			
 			lastRetrieved = next;
 			next = next.next;
+			previous = next.prev;
+			nextIndex++;
+			previousIndex++;
 			return lastRetrieved.data;
 		}
 
@@ -174,10 +178,14 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 		 */
 		@Override
 		public E previous() {
-			if (previous == null) {
+			if (!hasPrevious()) {
 				throw new NoSuchElementException();
 			}
 			lastRetrieved = previous;
+			previous = previous.prev;
+			next = previous.next;
+			previousIndex--;
+			nextIndex--;
 			return lastRetrieved.data;
 		}
 
@@ -218,8 +226,9 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			}
 			
 			ListNode lR = new ListNode(element, previous, next);
-			lastRetrieved = lR;
-			
+			lastRetrieved = null;
+			previous = lR;
+			next.prev = lR;
 		} 
 		
 	}
