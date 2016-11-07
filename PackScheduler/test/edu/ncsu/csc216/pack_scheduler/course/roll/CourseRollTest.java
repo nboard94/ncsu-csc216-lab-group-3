@@ -27,7 +27,9 @@ public class CourseRollTest {
 	Student s8 = new Student("f8", "l9", "id8", "id8@ncsu.edu", "pw", 16);
 	Student s9 = new Student("f9", "l9", "id9", "id9@ncsu.edu", "pw", 16);
 	Student s10 = new Student("f10", "l10", "id10", "id10@ncsu.edu", "pw", 16);
-	Student s11 = new Student("f11", "l11", "id11", "id11@ncsu.edu", "pw", 16);
+	Student s11 = new Student("f11", "l11", "id11", "id11@ncsu.edu", "pw", 16);	
+	Student s12 = new Student("f11", "l11", "id11", "id11@ncsu.edu", "pw", 16);
+
 	/**
 	 * Tests courseRoll()
 	 */
@@ -120,10 +122,9 @@ public class CourseRollTest {
 		roll.enroll(s8);
 		roll.enroll(s9);
 		roll.enroll(s10);
-		roll.enroll(s11);
 		//test drop valid student
 		roll.drop(s1);
-		assertEquals(0, roll.getOpenSeats());
+		assertEquals(1, roll.getOpenSeats());
 		
 		//test drop student does not exist in roll
 		try {
@@ -137,13 +138,13 @@ public class CourseRollTest {
 			roll.drop(null);
 		} catch (IllegalArgumentException e){
 			assertEquals(e.getMessage(), "Student cannot be null.");
-			assertEquals(0, roll.getOpenSeats());
+			assertEquals(1, roll.getOpenSeats());
 		}
 		
 		roll.enroll(s1);
-		assertEquals(1, roll.getNumberOnWaitlist());
+		assertEquals(0, roll.getNumberOnWaitlist());
 		roll.drop(s1);
-		assertEquals(0, roll.getOpenSeats());
+		assertEquals(1, roll.getOpenSeats());
 		assertEquals(0, roll.getNumberOnWaitlist());
 	}
 	/**

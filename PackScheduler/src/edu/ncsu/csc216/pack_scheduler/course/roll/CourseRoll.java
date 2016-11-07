@@ -81,7 +81,7 @@ public class CourseRoll {
 		for(int i = 0; i < roll.size(); i++)
 			if(roll.get(i).equals(s))
 				throw new IllegalArgumentException();
-		if(enrollmentCap == roll.size()) {
+		if(enrollmentCap <= roll.size()) {
 			try {
 				waitlist.enqueue(s);
 			} catch (IllegalArgumentException e) {
