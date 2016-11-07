@@ -32,8 +32,7 @@ public class FacultyDirectory {
 	 * Creates an empty faculty directory list
 	 */
 	public void newFacultyDirectory() {
-		facultyDirectory = new LinkedList<Faculty>();
-		
+		facultyDirectory = new LinkedList<Faculty>();	
 	}
 	
 	/**
@@ -57,7 +56,6 @@ public class FacultyDirectory {
 	 * @param password Faculty password
 	 * @param repeatPassword Faculty repeated password
 	 * @param maxCourses Number of courses teaching
-	 * @return true if faculty could be added
 	 */
 	public boolean addFaculty(String firstName, String lastName, String id, String email, String password,
 			String repeatPassword, int maxCourses) {
