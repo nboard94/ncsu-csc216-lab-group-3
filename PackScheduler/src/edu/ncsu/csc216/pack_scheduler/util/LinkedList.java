@@ -207,8 +207,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			if (lastRetrieved == null) {
 				throw new IllegalStateException();
 			}
-			lastRetrieved.prev = lastRetrieved.next;
-			lastRetrieved = null;
+			lastRetrieved.prev.next = lastRetrieved.next;
+			lastRetrieved.next.prev = lastRetrieved.prev;
 			size--;
 		}
 
@@ -225,7 +225,7 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 				throw new IllegalStateException();
 			}
 			
-			ListNode lR = new ListNode(element, previous, next);
+			ListNode lR = new ListNode(element, lastRetrieved.prev, lastRetrieved.next);
 			lastRetrieved.next.prev = lR;
 			lastRetrieved.prev.next = lR;
 		} 
