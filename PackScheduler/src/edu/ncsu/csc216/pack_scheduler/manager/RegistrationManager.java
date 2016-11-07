@@ -235,12 +235,8 @@ public boolean dropStudentFromCourse(Course c) {
         	return false;
         }
         c.getCourseRoll().drop(s);
-        if (s.canAdd(c)) {
+        return s.canAdd(c);
         	//s.getSchedule().removeCourseFromSchedule(c);
-        	return true;
-        } else {
-        	return false;
-        }
          
     } catch (IllegalArgumentException e) {
         return false; 
