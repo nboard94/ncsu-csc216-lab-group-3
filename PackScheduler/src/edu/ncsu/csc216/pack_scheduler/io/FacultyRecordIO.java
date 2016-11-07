@@ -116,7 +116,7 @@ public class FacultyRecordIO {
 			maxCourses = input.nextInt();
 		} catch(NoSuchElementException e) {
 			input.close();
-			throw new IllegalArgumentException("Invalid max credits");
+			throw new IllegalArgumentException("Invalid max courses");
 		}
 		Faculty temp = null;
 		try {
