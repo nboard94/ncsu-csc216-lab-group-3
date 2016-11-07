@@ -44,7 +44,7 @@ public class LinkedAbstractList<E> extends AbstractList<E> {
 	@Override
 	public void add(int i, E element) {
 		ListNode<E> currentNode = front;
-		System.out.println(capacity);
+		System.out.println(capacity + "abstractlist");
 		System.out.println(size);
 		System.out.println(i + "index");
 		if (size >= capacity) {
