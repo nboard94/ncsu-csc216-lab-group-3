@@ -22,6 +22,7 @@ public class CourseRoll {
 	private static final int MAX_ENROLLMENT = 250;
 	/** Maximum capacity of waitlist */
 	private static final int WAITLIST_SIZE = 10;
+	private Course course;
 	/**
 	 * Constructor for the course roll
 	 * @param c Course
@@ -32,9 +33,16 @@ public class CourseRoll {
 		if (c == null) {
 			throw new IllegalArgumentException("Course cannot be null.");
 		}
+		setCourse(c);
 		setEnrollmentCap(i);
 		roll = new LinkedAbstractList<Student>(enrollmentCap);
 		waitlist = new LinkedQueue<Student>(WAITLIST_SIZE);
+	}
+	/**
+	 * Sets the course
+	 */
+	private void setCourse(Course c){
+		course = c;
 	}
 	/**
 	 * get the enrollment cap
@@ -80,6 +88,7 @@ public class CourseRoll {
 				throw new IllegalArgumentException("Waitlist is full.");
 			}
 		} else {
+			s.getSchedule().addCourseToSchedule(course);
 				roll.add(roll.size(), s);
 		}
 	}
