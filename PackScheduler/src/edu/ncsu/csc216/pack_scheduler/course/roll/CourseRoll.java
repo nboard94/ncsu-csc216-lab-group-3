@@ -89,7 +89,6 @@ public class CourseRoll {
 			}
 		} else {
 			if(s.getSchedule().canAdd(course)){
-				s.getSchedule().addCourseToSchedule(course);
 				roll.add(roll.size(), s);
 			}
 		}
@@ -104,9 +103,8 @@ public class CourseRoll {
 		for(int i = 0; i < roll.size(); i++){
 			if(0 == roll.get(i).compareTo(s))
 				try{
-					roll.remove(i).getSchedule().removeCourseFromSchedule(course);
 					if (!waitlist.isEmpty())
-						enroll( waitlist.dequeue());
+						enroll(waitlist.dequeue());
 				} catch(IndexOutOfBoundsException E) {
 					throw new IllegalArgumentException();
 				}
