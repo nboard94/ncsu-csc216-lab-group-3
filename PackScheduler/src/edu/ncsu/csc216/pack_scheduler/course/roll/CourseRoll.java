@@ -102,7 +102,7 @@ public class CourseRoll {
 		if(s == null)
 			throw new IllegalArgumentException("Student cannot be null.");
 		for(int i = 0; i < roll.size(); i++){
-			if(roll.get(i).equals(s))
+			if(0 == roll.get(i).compareTo(s))
 				try{
 					roll.remove(i).getSchedule().removeCourseFromSchedule(course);
 					if (!waitlist.isEmpty())
