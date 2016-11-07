@@ -31,6 +31,7 @@ public class Faculty extends User {
 	}
 
 	/**
+	 * Gets the number of courses faculty has
 	 * @return the maxCourses
 	 */
 	public int getMaxCourses() {
@@ -38,6 +39,7 @@ public class Faculty extends User {
 	}
 
 	/**
+	 * Sets the number of courses faculty has
 	 * @param maxCourses the maxCourses to set
 	 */
 	public void setMaxCourses(int maxCourses) {

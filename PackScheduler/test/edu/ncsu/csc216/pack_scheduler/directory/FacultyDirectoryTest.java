@@ -11,7 +11,11 @@ import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * Tests FacultyDirectory 
+ * @author dndereef
+ *
+ */
 public class FacultyDirectoryTest {
 
 	/** Valid course records */
@@ -55,6 +59,8 @@ public class FacultyDirectoryTest {
 		FacultyDirectory fd = new FacultyDirectory();
 		assertFalse(fd.removeFaculty("sesmith5"));
 		assertEquals(0, fd.getFacultyDirectory().length);
+		String[][] s = fd.getFacultyDirectory();
+		assertEquals(0, s.length);
 	}
 
 	/**

@@ -6,6 +6,11 @@ import java.util.ListIterator;
 
 import org.junit.Test;
 
+/**
+ * Tests LinkedList
+ * @author dndereef
+ *
+ */
 public class LinkedListTest {
 	/**
 	 * test for  constructor

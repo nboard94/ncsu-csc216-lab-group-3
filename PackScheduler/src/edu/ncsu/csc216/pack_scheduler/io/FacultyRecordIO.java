@@ -56,7 +56,7 @@ public class FacultyRecordIO {
 	 * Prints the students' records onto a new file one Student object at time
 	 * 
 	 * @param fileName name of the new file
-	 * @param studentDirectory an array of Student objects
+	 * @param facultyDirectory an array of Student objects
 	 * @throws IOException if unable to write to the file
 	 */
 	public static void writeFacultyRecords(String fileName, LinkedList<Faculty> facultyDirectory) throws IOException {

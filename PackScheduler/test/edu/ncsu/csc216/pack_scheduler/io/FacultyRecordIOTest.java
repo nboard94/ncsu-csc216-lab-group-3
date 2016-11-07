@@ -14,7 +14,11 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.util.LinkedList;
-
+/**
+ * Tests FacultyRecordIO
+ * @author dndereef
+ *
+ */
 public class FacultyRecordIOTest {
 
 	/** Valid faculty records */
