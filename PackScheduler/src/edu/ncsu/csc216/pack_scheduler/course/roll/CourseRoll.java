@@ -95,7 +95,7 @@ public class CourseRoll {
 				try{
 					roll.remove(i);
 					if (!waitlist.isEmpty())
-						roll.add(waitlist.dequeue());
+						enroll(waitlist.dequeue());
 				} catch(IndexOutOfBoundsException E) {
 					throw new IllegalArgumentException();
 				}
