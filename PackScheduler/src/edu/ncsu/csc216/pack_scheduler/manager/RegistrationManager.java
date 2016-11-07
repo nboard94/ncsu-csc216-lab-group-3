@@ -206,9 +206,7 @@ public boolean enrollStudentInCourse(Course c) {
     }
     try {
         Student s = (Student)currentUser;
-        Schedule schedule = s.getSchedule();
         CourseRoll roll = c.getCourseRoll();
-        
         if (s.canAdd(c) && roll.canEnroll(s)) {
      //       schedule.addCourseToSchedule(c);
             roll.enroll(s);
