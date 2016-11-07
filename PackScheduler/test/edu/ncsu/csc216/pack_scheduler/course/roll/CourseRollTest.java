@@ -145,7 +145,6 @@ public class CourseRollTest {
 		roll.enroll(s1);
 		assertEquals(0, roll.getOpenSeats());
 		assertEquals(0, roll.getNumberOnWaitlist());
-		System.out.println("**********************");
 		roll.drop(s1);
 		assertEquals(1, roll.getOpenSeats());
 		assertEquals(0, roll.getNumberOnWaitlist());

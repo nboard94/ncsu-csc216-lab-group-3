@@ -45,6 +45,7 @@ public class FacultyRecordIO {
 					}				
 				}
 			} catch (IllegalArgumentException e) {
+				// Do nothing with faculty at given line
 			}
 		}
 		fileReader.close();

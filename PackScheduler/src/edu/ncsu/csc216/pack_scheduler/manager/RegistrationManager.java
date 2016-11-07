@@ -231,11 +231,21 @@ public boolean dropStudentFromCourse(Course c) {
     }
     try {
         Student s = (Student)currentUser;
+        if (!c.getCourseRoll().roll.contains(s)) {
+        	return false;
+        }
         c.getCourseRoll().drop(s);
-        return true; //s.getSchedule().removeCourseFromSchedule(c);
+        if (s.canAdd(c)) {
+        	//s.getSchedule().removeCourseFromSchedule(c);
+        	return true;
+        } else {
+        	return false;
+        }
+         
     } catch (IllegalArgumentException e) {
         return false; 
     }
+    
 }
 
 /**

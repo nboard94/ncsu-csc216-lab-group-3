@@ -123,12 +123,13 @@ public class RegistrationManagerTest {
 	@Test
 	public void testGetCurrentUser() {
 		// login a student first
+		manager.logout();
 		manager.getStudentDirectory().loadStudentsFromFile("test-files/student_records.txt");
 		manager.getStudentDirectory().addStudent("Jane", "Austin", "jaustin", "jaustin@ncsu.edu", "password",
 				"password", 17);
-		manager.login("jaustin", "password");
+		assertTrue(manager.login("jaustin", "password"));
 		// then test current user
-			assertEquals("Jane", manager.getCurrentUser().getFirstName());
+		assertEquals("Jane", manager.getCurrentUser().getFirstName());
 		assertEquals("Austin", manager.getCurrentUser().getLastName());
 		assertEquals("jaustin", manager.getCurrentUser().getId());
 		assertEquals("jaustin@ncsu.edu", manager.getCurrentUser().getEmail());
