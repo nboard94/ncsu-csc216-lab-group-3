@@ -56,6 +56,7 @@ public class FacultyDirectory {
 	 * @param password Faculty password
 	 * @param repeatPassword Faculty repeated password
 	 * @param maxCourses Number of courses teaching
+	 * @return True if faculty added, false if not.
 	 */
 	public boolean addFaculty(String firstName, String lastName, String id, String email, String password,
 			String repeatPassword, int maxCourses) {
