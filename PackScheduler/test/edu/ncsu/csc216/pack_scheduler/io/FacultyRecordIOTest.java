@@ -85,6 +85,20 @@ public class FacultyRecordIOTest {
 		} catch (FileNotFoundException e) {
 			fail("Unexpected FileNotFoundException");
 		}
+		
+		try {
+			f = FacultyRecordIO.readFacultyRecords("test-files/numbers.txt");
+			assertEquals(0, f.size());
+		} catch (FileNotFoundException e) {
+			fail("Unexpected FileNotFoundException");
+		}
+		
+		try {
+			f = FacultyRecordIO.readFacultyRecords("test-files/duplicate_faculty.txt");
+			assertEquals(1, f.size());
+		} catch (FileNotFoundException e) {
+			fail("Unexpected FileNotFoundException");
+		}
 		try {
 			f = FacultyRecordIO.readFacultyRecords(validTestFile);
 			assertEquals(8, f.size());

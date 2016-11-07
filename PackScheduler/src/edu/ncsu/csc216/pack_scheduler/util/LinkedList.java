@@ -19,8 +19,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	 * Constructor for LinkedList
 	 */
 	public LinkedList(){
-		front = new ListNode(null,null,null);
-		back = new ListNode(null,front,null);
+		front = new ListNode(null, null, null);
+		back = new ListNode(null, front, null);
 		front.next = back;
 		back.prev = front;
 		size = 0;
@@ -29,10 +29,11 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 	
 	/**
 	 * Iterator constructor
+	 * @param index Index for iterator to traverse to
 	 */
 	@Override
-	public ListIterator<E> listIterator(int arg0) {
-		LinkedListIterator listIter = new LinkedListIterator(arg0);
+	public ListIterator<E> listIterator(int index) {
+		LinkedListIterator listIter = new LinkedListIterator(index);
 		return listIter;
 	}
 
@@ -107,19 +108,20 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 
 		/**
 		 * Iterator adds desired element
+		 * @param element Element to add
 		 */
 		@Override
-		public void add(E arg0) {
-			if(arg0 == null)
+		public void add(E element) {
+			if(element == null)
 				throw new NullPointerException();
 		
 			if(size == 0){
-				ListNode lN = new ListNode(arg0, previous, next);
+				ListNode lN = new ListNode(element, previous, next);
 				front.next = lN;
 				back.prev = lN;
 					
 			} else{
-				ListNode lN = new ListNode(arg0, previous, next);
+				ListNode lN = new ListNode(element, previous, next);
 				previous.next = lN;
 				next.prev = lN;
 			}
