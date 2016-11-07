@@ -79,7 +79,7 @@ public class CourseRoll {
 			}
 		} else {
 			try{
-				roll.add(s);
+				roll.add(roll.size(), s);
 			} catch(Exception E) {
 				throw new IllegalArgumentException();
 			}
