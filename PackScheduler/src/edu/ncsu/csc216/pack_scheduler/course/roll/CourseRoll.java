@@ -22,6 +22,7 @@ public class CourseRoll {
 	private static final int MAX_ENROLLMENT = 250;
 	/** Maximum capacity of waitlist */
 	private static final int WAITLIST_SIZE = 10;
+	private Course course;
 	/**
 	 * Constructor for the course roll
 	 * @param c Course
@@ -32,9 +33,16 @@ public class CourseRoll {
 		if (c == null) {
 			throw new IllegalArgumentException("Course cannot be null.");
 		}
-		enrollmentCap = i;
+		setCourse(c);
+		setEnrollmentCap(i);
 		roll = new LinkedAbstractList<Student>(enrollmentCap);
 		waitlist = new LinkedQueue<Student>(WAITLIST_SIZE);
+	}
+	/**
+	 * Sets the course
+	 */
+	private void setCourse(Course c){
+		course = c;
 	}
 	/**
 	 * get the enrollment cap
@@ -48,11 +56,16 @@ public class CourseRoll {
 	 * @param i new enrollment cap that wants to be set
 	 */
 	public void setEnrollmentCap(int i){
-		if(roll == null && i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT)
-			enrollmentCap = i;
-		if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT)
-			if(roll != null && roll.size() <= i)
+		if(roll == null)
+			if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT)
 				enrollmentCap = i;
+			else 
+				throw new IllegalArgumentException();
+		else if(roll != null)
+			if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT && roll.size() <= i){
+				enrollmentCap = i;
+				roll.setCapacity(enrollmentCap);
+			}
 			else
 				throw new IllegalArgumentException();
 		else 
@@ -68,18 +81,15 @@ public class CourseRoll {
 		for(int i = 0; i < roll.size(); i++)
 			if(roll.get(i).equals(s))
 				throw new IllegalArgumentException();
-		if(enrollmentCap == roll.size()) {
+		if(enrollmentCap <= roll.size()) {
 			try {
 				waitlist.enqueue(s);
 			} catch (IllegalArgumentException e) {
 				throw new IllegalArgumentException("Waitlist is full.");
 			}
 		} else {
-			try{
-				roll.add(s);
-			} catch(Exception E) {
-				throw new IllegalArgumentException();
-			}
+			s.getSchedule().addCourseToSchedule(course);
+			roll.add(roll.size(), s);
 		}
 	}
 	/**
@@ -87,18 +97,24 @@ public class CourseRoll {
 	 * @param s student to be dropped
 	 */
 	public void drop(Student s){
+		int counter = 0;
 		if(s == null)
 			throw new IllegalArgumentException("Student cannot be null.");
 		for(int i = 0; i < roll.size(); i++){
 			if(roll.get(i).equals(s))
 				try{
-					roll.remove(i);
+					counter--;
+					roll.remove(i).getSchedule().removeCourseFromSchedule(course);
 					if (!waitlist.isEmpty())
-						roll.add(waitlist.dequeue());
+						enroll(waitlist.dequeue());
 				} catch(IndexOutOfBoundsException E) {
 					throw new IllegalArgumentException();
 				}
+			else 
+				counter++;
 		}
+		if(counter == roll.size())
+			throw new IllegalArgumentException();
 		// If student drops from waitlist
 		// Adds back in students not dropping from waitlist
 		for(int j = 0; j < waitlist.size(); j++) {

@@ -207,11 +207,9 @@ public boolean enrollStudentInCourse(Course c) {
     }
     try {
         Student s = (Student)currentUser;
-        Schedule schedule = s.getSchedule();
         CourseRoll roll = c.getCourseRoll();
-        
         if (s.canAdd(c) && roll.canEnroll(s)) {
-            schedule.addCourseToSchedule(c);
+     //       schedule.addCourseToSchedule(c);
             roll.enroll(s);
             return true;
         }
@@ -234,7 +232,7 @@ public boolean dropStudentFromCourse(Course c) {
     try {
         Student s = (Student)currentUser;
         c.getCourseRoll().drop(s);
-        return s.getSchedule().removeCourseFromSchedule(c);
+        return true; //s.getSchedule().removeCourseFromSchedule(c);
     } catch (IllegalArgumentException e) {
         return false; 
     }
