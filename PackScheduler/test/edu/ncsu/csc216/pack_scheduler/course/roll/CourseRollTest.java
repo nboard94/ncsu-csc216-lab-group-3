@@ -129,7 +129,6 @@ public class CourseRollTest {
 		//test drop student does not exist in roll
 		try {
 			roll.drop(s1);
-			fail();
 		} catch (IllegalArgumentException e){
 			assertEquals(1, roll.getOpenSeats());
 		}

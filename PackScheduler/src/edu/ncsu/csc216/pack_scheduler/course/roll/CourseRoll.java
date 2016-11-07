@@ -97,24 +97,18 @@ public class CourseRoll {
 	 * @param s student to be dropped
 	 */
 	public void drop(Student s){
-		int counter = 0;
 		if(s == null)
 			throw new IllegalArgumentException("Student cannot be null.");
 		for(int i = 0; i < roll.size(); i++){
 			if(roll.get(i).equals(s))
 				try{
-					counter--;
-					roll.remove(i).getSchedule().removeCourseFromSchedule(course);
+				roll.remove(i).getSchedule().removeCourseFromSchedule(course);
 					if (!waitlist.isEmpty())
 						enroll(waitlist.dequeue());
 				} catch(IndexOutOfBoundsException E) {
 					throw new IllegalArgumentException();
-				}
-			else 
-				counter++;
+				} 
 		}
-		if(counter == roll.size())
-			throw new IllegalArgumentException();
 		// If student drops from waitlist
 		// Adds back in students not dropping from waitlist
 		for(int j = 0; j < waitlist.size(); j++) {
