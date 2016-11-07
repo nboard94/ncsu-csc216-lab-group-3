@@ -54,8 +54,10 @@ public class CourseRoll {
 			else 
 				throw new IllegalArgumentException();
 		else if(roll != null)
-			if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT && roll.size() <= i)
+			if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT && roll.size() <= i){
 				enrollmentCap = i;
+				roll.setCapacity(enrollmentCap);
+			}
 			else
 				throw new IllegalArgumentException();
 		else 
