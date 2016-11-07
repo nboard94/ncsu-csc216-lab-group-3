@@ -80,11 +80,19 @@ public class FacultyRecordIOTest {
 		}
 		
 		try {
+			f = FacultyRecordIO.readFacultyRecords("test-files/invalid_course_records.txt");
+			assertEquals(0, f.size());
+		} catch (FileNotFoundException e) {
+			fail("Unexpected FileNotFoundException");
+		}
+		try {
 			f = FacultyRecordIO.readFacultyRecords(validTestFile);
 			assertEquals(8, f.size());
 		} catch (FileNotFoundException e) {
 			fail("Unexpected error reading " + validTestFile);
 		}
+		
+			
 		try {
 			LinkedList<Faculty> faculty = FacultyRecordIO.readFacultyRecords(validTestFile);
 			assertEquals(8, faculty.size());
