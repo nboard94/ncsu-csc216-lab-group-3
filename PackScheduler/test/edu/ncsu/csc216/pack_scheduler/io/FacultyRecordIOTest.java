@@ -67,31 +67,30 @@ public class FacultyRecordIOTest {
 
 	/**
 	 * Tests readFacultyRecords
-	 * @throws FileNotFoundException 
 	 */
 	@Test
-	public void testReadFacultyRecords() throws FileNotFoundException {
+	public void testReadFacultyRecords() {
 		
 		LinkedList<Faculty> f;
 		try {
 			f = FacultyRecordIO.readFacultyRecords(invalidTestFile);
-			fail();
-		} catch (IllegalArgumentException e) {
-			//cathces invalid password exception
+			assertEquals(0, f.size());
+		} catch (FileNotFoundException e) {
+			fail("Unexpected FileNotFoundException");
 		}
 		
 		try {
 			f = FacultyRecordIO.readFacultyRecords("test-files/invalid_course_records.txt");
-			fail();
-		} catch (IllegalArgumentException e) {
-			//cathces invalid max credits
+			assertEquals(0, f.size());
+		} catch (FileNotFoundException e) {
+			fail("Unexpected FileNotFoundException");
 		}
 		
 		try {
 			f = FacultyRecordIO.readFacultyRecords("test-files/numbers.txt");
-			fail();
-		} catch (IllegalArgumentException e) {
-			//cathces invalid max credits
+			assertEquals(0, f.size());
+		} catch (FileNotFoundException e) {
+			fail("Unexpected FileNotFoundException");
 		}
 		
 		try {
