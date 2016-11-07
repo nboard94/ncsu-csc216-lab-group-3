@@ -57,6 +57,8 @@ public class CourseRollTest {
 		CourseRoll roll = c.getCourseRoll();
 		roll.setEnrollmentCap(20);
 		assertEquals(20, roll.getEnrollmentCap());
+		
+		roll.setEnrollmentCap(20);
 	}
 	/**
 	 * Tests enroll()

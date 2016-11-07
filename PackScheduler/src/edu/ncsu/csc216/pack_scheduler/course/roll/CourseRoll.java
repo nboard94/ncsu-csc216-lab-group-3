@@ -32,7 +32,7 @@ public class CourseRoll {
 		if (c == null) {
 			throw new IllegalArgumentException("Course cannot be null.");
 		}
-		enrollmentCap = i;
+		setEnrollmentCap(i);
 		roll = new LinkedAbstractList<Student>(enrollmentCap);
 		waitlist = new LinkedQueue<Student>(WAITLIST_SIZE);
 	}

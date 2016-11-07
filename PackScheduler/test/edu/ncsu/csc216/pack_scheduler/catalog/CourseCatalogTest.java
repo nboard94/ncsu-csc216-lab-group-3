@@ -92,7 +92,7 @@ public class CourseCatalogTest {
 		assertNull(ws.getCourseFromCatalog("CSC492", "001"));
 		
 		//Attempt to get a course that does exist
-		Activity c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, 01, MEETING_DAYS, START_TIME, END_TIME);
+		Activity c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, 12, MEETING_DAYS, START_TIME, END_TIME);
 		assertEquals(c, ws.getCourseFromCatalog("CSC216", "001"));
 	}
 	
