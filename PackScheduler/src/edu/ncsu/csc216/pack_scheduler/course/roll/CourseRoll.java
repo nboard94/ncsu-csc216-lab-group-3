@@ -68,8 +68,6 @@ public class CourseRoll {
 	 * @param s Student to be enrolled
 	 */
 	public void enroll(Student s){
-		System.out.println(enrollmentCap + "incourseroll");
-		System.out.println(roll.size());
 		if(s == null)
 			throw new IllegalArgumentException("Student cannot be null.");
 		for(int i = 0; i < roll.size(); i++)
@@ -82,11 +80,7 @@ public class CourseRoll {
 				throw new IllegalArgumentException("Waitlist is full.");
 			}
 		} else {
-//			try{
 				roll.add(roll.size(), s);
-//			} catch(Exception E) {
-//				throw new IllegalArgumentException();
-//			}
 		}
 	}
 	/**
