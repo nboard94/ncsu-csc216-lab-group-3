@@ -226,9 +226,8 @@ public class LinkedList<E> extends AbstractSequentialList<E> {
 			}
 			
 			ListNode lR = new ListNode(element, previous, next);
-			lastRetrieved = null;
-			previous = lR;
-			next.prev = lR;
+			lastRetrieved.next.prev = lR;
+			lastRetrieved.prev.next = lR;
 		} 
 		
 	}
