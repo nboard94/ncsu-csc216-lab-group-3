@@ -66,8 +66,8 @@ public class LinkedListRecursive<E> {
 		if (element == null) {
 			throw new NullPointerException();
 		}
-		if (size == 1 && contains(element)) {
-			front = null;
+		if (get(0).equals(element)) {
+			front = front.next;
 			size--;
 			return true;
 		} else if (!contains(element)) {
@@ -92,7 +92,13 @@ public class LinkedListRecursive<E> {
 	}
 	
 	public E set(int index, E element) {
-		return null;
+		if (index >= size || index < 0) {
+			throw new IndexOutOfBoundsException("Index outside of list size.");
+		}
+		if (element == null) {
+			throw new NullPointerException();
+		}
+		return front.set(index, element);
 	}
 	
 	public boolean contains(E element) {
@@ -164,7 +170,13 @@ public class LinkedListRecursive<E> {
 		}
 		
 		private E set(int index, E element) {
-			return null;
+			if (index == 0) {
+				E temp = data;
+				data = element;
+				return temp;
+			} else {
+				return this.next.set(index - 1, element);
+			}
 		}
 		
 		private boolean contains(E element) {

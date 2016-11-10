@@ -19,7 +19,7 @@ public class LinkedListRecursiveTest {
 	 */
 	@Test
 	public void testSet(){
-		LinkedAbstractList<String> a = new LinkedAbstractList<String>(10);
+		LinkedListRecursive<String> a = new LinkedListRecursive<String>();
 		try{
 			a.set(0, "test");
 			fail();
@@ -32,19 +32,14 @@ public class LinkedListRecursiveTest {
 		} catch(IndexOutOfBoundsException E) {
 			assertEquals(a.size(), 0);
 		}
-		try{
-			a.set(0, null);
-			fail();
-		} catch(NullPointerException E) {
-			assertEquals(a.size(), 0);
-		}
+		
 		
 		a.add(0, "test");
 		assertEquals(a.size(), 1);
 		try{
-			a.set(1, "test");
+			a.set(0, null);
 			fail();
-		} catch(IllegalArgumentException E) {
+		} catch(NullPointerException E) {
 			assertEquals(a.size(), 1);
 		}
 		
@@ -54,9 +49,9 @@ public class LinkedListRecursiveTest {
 		assertEquals(a.get(1), "string");
 		assertEquals(a.get(2), "test");
 		a.set(0, "other");
-		assertEquals(a.get(0), "other");
+		assertEquals("other", a.get(0));
 		a.set(1, "letters");
-		assertEquals(a.get(1), "letters");
+		assertEquals("letters", a.get(1));
 	}
 	/**
 	 * test for add method
