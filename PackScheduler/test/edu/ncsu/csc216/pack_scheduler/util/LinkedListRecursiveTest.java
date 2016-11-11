@@ -90,6 +90,7 @@ public class LinkedListRecursiveTest {
 	public void testAddIntE() {
 		//try to add 11 elements
 		LinkedListRecursive<String> list = new LinkedListRecursive<String>();
+		assertTrue(list.isEmpty());
 		list.add(0, "e");
 		list.add(0, "f");
 		list.add(0, "g");
@@ -220,7 +221,12 @@ public class LinkedListRecursiveTest {
 		assertEquals(0, a.size());
 		a.add(0, "Apple");
 		a.add(1, "Grape");
+		a.add(2, "Sour");
 		assertTrue(a.remove("Apple"));
+		assertEquals(2, a.size());
+		assertEquals("Grape", a.get(0));
+		assertEquals("Sour", a.get(1));
+		assertTrue(a.remove("Sour"));
 		assertEquals(1, a.size());
 		assertEquals("Grape", a.get(0));
 	}

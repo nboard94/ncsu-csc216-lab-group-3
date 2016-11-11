@@ -1,23 +1,46 @@
 package edu.ncsu.csc216.pack_scheduler.util;
 
-
+/**
+ * Recursive linked list class
+ * @author dndereef
+ *
+ * @param <E> Element type
+ */
 public class LinkedListRecursive<E> {
+	/** Number of elements in list */
 	private int size;
+	/** Head of list */
 	private ListNode front;
 	
+	/**
+	 * Constructs a recursive linked list
+	 */
 	public LinkedListRecursive() {
 		front = null;
 		size = 0;
 	}
 	
+	/**
+	 * Checks if the list is empty
+	 * @return true is list is empty
+	 */
 	public boolean isEmpty() {
 		return size == 0;
 	}
 	
+	/**
+	 * Gets the size of the list
+	 * @return size Number of elements in list
+	 */
 	public int size() {
 		return size;
 	}
 	
+	/**
+	 * Adds a new element to the list
+	 * @param element Element to add
+	 * @return true if the element was added successfully
+	 */
 	public boolean add(E element) {
 		if (contains(element)) {
 			throw new IllegalArgumentException();
@@ -31,6 +54,11 @@ public class LinkedListRecursive<E> {
 		return false;
 	}
 	
+	/**
+	 * Adds a new element to specific index in list
+	 * @param index Index of list to add the element
+	 * @param element Element to add
+	 */
 	public void add(int index, E element) {
 		if (contains(element)) {
 			throw new IllegalArgumentException();
@@ -52,6 +80,11 @@ public class LinkedListRecursive<E> {
 		}
 	}
 	
+	/**
+	 * Gets the element at a specific index
+	 * @param index Index of list
+	 * @return the element at the specified index
+	 */
 	public E get(int index) {
 		if (index >= size || index < 0) {
 			throw new IndexOutOfBoundsException("Index outside of list size.");
@@ -59,6 +92,11 @@ public class LinkedListRecursive<E> {
 		return front.get(index);
 	}
 	
+	/**
+	 * Removes the element from the list
+	 * @param element Element to remove
+	 * @return true if the element could be removed
+	 */
 	public boolean remove(E element) {
 		if (size == 0) {
 			throw new IllegalArgumentException();
@@ -76,6 +114,11 @@ public class LinkedListRecursive<E> {
 		return front.remove(element);
 	}
 	
+	/**
+	 * Removes the element at a specific index
+	 * @param index Index of list
+	 * @return the element removed from the list
+	 */
 	public E remove(int index) {
 		if (index >= size || index < 0) {
 			throw new IndexOutOfBoundsException("Index outside of list size.");
@@ -91,6 +134,12 @@ public class LinkedListRecursive<E> {
 		return front.remove(index - 1);
 	}
 	
+	/**
+	 * Replaces element at the index with new element
+	 * @param index Index of list
+	 * @param element Element replacing with
+	 * @return the element that was replaced
+	 */
 	public E set(int index, E element) {
 		if (index >= size || index < 0) {
 			throw new IndexOutOfBoundsException("Index outside of list size.");
@@ -101,19 +150,16 @@ public class LinkedListRecursive<E> {
 		return front.set(index, element);
 	}
 	
+	/**
+	 * Checks if the list already has the element
+	 * @param element Element looking for
+	 * @return true if the list has the element
+	 */
 	public boolean contains(E element) {
 		if (size == 0) {
 			return false;
 		}
-		ListNode current = front;
-		while (current != null) {
-			E found = current.data;
-			if (found.equals(element)) {
-				return true;
-			}
-			current = current.next;
-		}
-		return false;
+		return front.contains(element);
 	}
 	/**
 	 * ListNode class that uses recursion for outer class
@@ -127,9 +173,9 @@ public class LinkedListRecursive<E> {
 		public ListNode next;
 		
 		/**
-		 * 
-		 * @param index
-		 * @param element
+		 * Recursive add for super
+		 * @param index Index of list
+		 * @param element Element to add
 		 */
 		private void add(int index, E element) {
 			if (index == 0) {
@@ -140,6 +186,11 @@ public class LinkedListRecursive<E> {
 			}
 		}
 		
+		/**
+		 * Recursive get for super
+		 * @param index Index of list
+		 * @return the element at a specific index
+		 */
 		private E get(int index) {
 			if (index == 0) {
 				return data;
@@ -148,6 +199,11 @@ public class LinkedListRecursive<E> {
 			}
 		}
 		
+		/**
+		 * Recursive remove for super
+		 * @param element Element to remove
+		 * @return true if the element was removed
+		 */
 		private boolean remove(E element) {
 			if (this.next.data.equals(element)) {
 				this.next = this.next.next;
@@ -158,6 +214,11 @@ public class LinkedListRecursive<E> {
 			}
 		}
 		
+		/**
+		 * Recursive remove at an index for super
+		 * @param index Index of list
+		 * @return the element removed from the list
+		 */
 		private E remove(int index) {
 			if (index == 0) {
 				E temp = data;
@@ -169,6 +230,12 @@ public class LinkedListRecursive<E> {
 			}
 		}
 		
+		/**
+		 * Recursive set for super
+		 * @param index Index of list
+		 * @param element Element replacing with
+		 * @return the element that was replaced
+		 */
 		private E set(int index, E element) {
 			if (index == 0) {
 				E temp = data;
@@ -179,8 +246,19 @@ public class LinkedListRecursive<E> {
 			}
 		}
 		
+		/**
+		 * Recursive check for super
+		 * @param element Element looking for
+		 * @return true if the list has the element
+		 */
 		private boolean contains(E element) {
-			return false;
+			if (this.data.equals(element)) {
+				return true;
+			} else if (this.next == null) {
+				return false;
+			} else {
+				return this.next.contains(element);
+			}
 		}
 		
 		/**
