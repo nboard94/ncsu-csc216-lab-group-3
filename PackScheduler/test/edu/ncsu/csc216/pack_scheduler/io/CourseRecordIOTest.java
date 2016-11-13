@@ -16,6 +16,7 @@ import org.junit.Test;
 import edu.ncsu.csc216.collections.list.SortedList;
 import edu.ncsu.csc216.pack_scheduler.course.Course;
 import edu.ncsu.csc216.pack_scheduler.io.CourseRecordIO;
+import edu.ncsu.csc216.pack_scheduler.manager.RegistrationManager;
 
 /**
  * Tests CouresRecordIO.
@@ -67,6 +68,14 @@ public class CourseRecordIOTest {
 	@Test
 	public void testReadValidCourseRecords() {
 		try {
+			RegistrationManager.getInstance().getFacultyDirectory().addFaculty("first", "last", "jdyoung2", "email@ncsu.edu", "abc123", "abc123", 2);
+			RegistrationManager.getInstance().getFacultyDirectory().addFaculty("first", "last", "spbalik", "email@ncsu.edu", "abc123", "abc123", 2);
+			RegistrationManager.getInstance().getFacultyDirectory().addFaculty("first", "last", "tbdimitr", "email@ncsu.edu", "abc123", "abc123", 2);
+			RegistrationManager.getInstance().getFacultyDirectory().addFaculty("first", "last", "sesmith5", "email@ncsu.edu", "abc123", "abc123", 2);
+			RegistrationManager.getInstance().getFacultyDirectory().addFaculty("first", "last", "jtking", "email@ncsu.edu", "abc123", "abc123", 2);
+			RegistrationManager.getInstance().getFacultyDirectory().addFaculty("first", "last", "jep", "email@ncsu.edu", "abc123", "abc123", 2);
+			RegistrationManager.getInstance().getFacultyDirectory().addFaculty("first", "last", "tmbarnes", "email@ncsu.edu", "abc123", "abc123", 2);
+			RegistrationManager.getInstance().getFacultyDirectory().addFaculty("first", "last", "dbsturgi", "email@ncsu.edu", "abc123", "abc123", 2);
 			SortedList<Course> courses = CourseRecordIO.readCourseRecords(validTestFile);
 			assertEquals(8, courses.size());
 			
