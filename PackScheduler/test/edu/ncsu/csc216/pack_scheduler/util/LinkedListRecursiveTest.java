@@ -3,7 +3,11 @@ package edu.ncsu.csc216.pack_scheduler.util;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
+/**
+ * Tests recursive linked list class
+ * @author dndereef
+ *
+ */
 public class LinkedListRecursiveTest {
 
 	/**
@@ -86,6 +90,9 @@ public class LinkedListRecursiveTest {
 		
 	}
 	
+	/**
+	 * Tests add at specific index
+	 */
 	@Test
 	public void testAddIntE() {
 		//try to add 11 elements
@@ -215,6 +222,9 @@ public class LinkedListRecursiveTest {
 		}
 	}
 	
+	/**
+	 * Tests remove a specific element
+	 */
 	@Test
 	public void testRemoveE() {
 		LinkedListRecursive<String> a = new LinkedListRecursive<String>();

@@ -50,8 +50,11 @@ public class LinkedListRecursive<E> {
 			size++;
 			return true;
 		}
+		// Checks if element is added to list 
+		// from recursive add method
+		int num = size;
 		front.add(size - 1, element);
-		return false;
+		return num != size;
 	}
 	
 	/**

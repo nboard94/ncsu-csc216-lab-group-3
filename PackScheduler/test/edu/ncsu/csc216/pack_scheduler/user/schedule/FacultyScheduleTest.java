@@ -144,7 +144,8 @@ public class FacultyScheduleTest {
 		//Attempt to remove from empty schedule
 		try {
 			schedule.removeCourseFromSchedule(catalog.getCourseFromCatalog("CSC216", "001"));
-		} catch (IndexOutOfBoundsException e) {
+			assertEquals(0, schedule.getNumScheduledCourses());
+		} catch (IllegalArgumentException e) {
 			fail("Schedule.removeCourseFromSchedule() - Should not throw IndexOutOfBoundsExcpetion, but did.");
 		}
 		
