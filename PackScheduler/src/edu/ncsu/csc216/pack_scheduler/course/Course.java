@@ -108,7 +108,9 @@ public class Course extends Activity implements Comparable<Course> {
 	 * @throws IllegalArgumentException when instructorId is null or empty String
 	 */
 	public void setInstructorId(String instructorId) {
-		if(instructorId == null || instructorId.length() == 0){
+		if(instructorId == null)
+			this.instructorId = null;
+		else if(instructorId.length() == 0){
 			throw new IllegalArgumentException("Invalid instructor id");
 		}
 		this.instructorId = instructorId;
@@ -186,7 +188,7 @@ public class Course extends Activity implements Comparable<Course> {
 			return false;
 		if (getEndTime() != other.getEndTime())
 			return false;
-		if (!instructorId.equals(other.instructorId))
+		if ( instructorId != null && !instructorId.equals(other.instructorId))
 			return false;
 		if (!getMeetingDays().equals(other.getMeetingDays()))
 			return false;

@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.pack_scheduler.user;
 
+import edu.ncsu.csc216.pack_scheduler.user.schedule.FacultySchedule;
+
 /**
  * Faculty object 
  * @author dndereef
@@ -13,6 +15,7 @@ public class Faculty extends User {
 	public static final int MIN_COURSES = 1;
 	/** Maximum number of courses allowed for a faculty */
 	public static final int MAX_COURSES = 3;
+	public FacultySchedule schedule;
 	
 	/**
 	 * Constructs a faculty similar to student
@@ -28,6 +31,7 @@ public class Faculty extends User {
 	public Faculty(String firstName, String lastName, String id, String email, String password, int maxCourses) {
 		super(firstName, lastName, id, email, password);
 		setMaxCourses(maxCourses);
+		schedule = new FacultySchedule(this.getId());
 	}
 
 	/**
@@ -89,9 +93,21 @@ public class Faculty extends User {
 		String temp = super.getFirstName() + "," + super.getLastName() + "," +  super.getId() + "," + super.getEmail() + "," + super.getPassword() + "," + maxCourses;
 		return temp;
 	}
-
 	
-	
+	/**
+	 * returns the faculty members schedule
+	 * @return the faculty members schedule
+	 */
+	public FacultySchedule getSchedule(){
+		return schedule;
+	}
+	/**
+	 * checks if faculty has more courses scheduled then they are allowed
+	 * @return true if they have more classes scheduled then there allowed else return false
+	 */
+	public boolean isOverloaded(){
+		return this.getSchedule().getNumScheduledCourses() > this.getMaxCourses();
+	}
 	
 
 }
