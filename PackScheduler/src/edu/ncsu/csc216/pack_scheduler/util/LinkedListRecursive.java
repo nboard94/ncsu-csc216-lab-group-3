@@ -130,9 +130,10 @@ public class LinkedListRecursive<E> {
 			return null;
 		}
 		if (index == 0) {
+			E temp = front.data;
 			front = front.next;
 			size--;
-			return front.data;
+			return temp;
 		} 
 		return front.remove(index - 1);
 	}
