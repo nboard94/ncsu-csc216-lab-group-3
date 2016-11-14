@@ -282,11 +282,12 @@ public class RegistrationManager {
 	public boolean removeFacultyFromCourse(Course c, Faculty f) {
 		return false;
 	}
+	
 	/**
 	 * 
 	 * @param f
 	 */
 	public void resetFacultySchedule(Faculty f) {
-		
+		f.schedule.resetSchedule();
 	}
 }

@@ -63,11 +63,9 @@ public class FacultySchedule {
 			return false;
 		}
 		for (int i = 0; i < schedule.size(); i++) {
-			if (schedule.get(i) == course) {
-				if (schedule.remove(course)) {
-					course.setInstructorId(null);
-					return true;
-				}
+			if (schedule.get(i) == course && schedule.remove(course)) {
+				course.setInstructorId(null);
+				return true;
 			}
 		}
 		

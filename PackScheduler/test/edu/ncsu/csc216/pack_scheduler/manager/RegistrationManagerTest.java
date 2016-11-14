@@ -472,19 +472,5 @@ public class RegistrationManagerTest {
 
 		manager.logout();
 	}
-	
-	@Test
-	public void testAddFacultyToCourse() {
-		
-	}
-	
-	@Test
-	public void testRemoveFacultyFromCourse() {
-		
-	}
-	
-	@Test
-	public void testResetFacultySchedule() {
-		
-	}
+
 }
