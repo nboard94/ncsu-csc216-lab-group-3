@@ -102,7 +102,7 @@ public class LinkedListRecursive<E> {
 	 */
 	public boolean remove(E element) {
 		if (size == 0) {
-			throw new IllegalArgumentException("Empty list");
+			return false;
 		}
 		if (element == null) {
 			throw new NullPointerException();
