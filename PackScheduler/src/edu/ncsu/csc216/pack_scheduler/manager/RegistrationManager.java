@@ -271,6 +271,9 @@ public class RegistrationManager {
 	 * @return True if the faculty was added to the course, false if otherwise.
 	 */
 	public boolean addFacultyToCourse(Course c, Faculty f) {
+		if (currentUser != null && !(currentUser instanceof Student)) {
+			return f.schedule.addCourseToSchedule(c);
+		}
 		return false;
 	}
 	
@@ -281,6 +284,9 @@ public class RegistrationManager {
 	 * @return True if the faculty was removed from the course, false if otherwise.
 	 */
 	public boolean removeFacultyFromCourse(Course c, Faculty f) {
+		if (currentUser != null && !(currentUser instanceof Student)) {
+			return f.schedule.removeCourseFromSchedule(c);
+		}
 		return false;
 	}
 	
@@ -289,6 +295,8 @@ public class RegistrationManager {
 	 * @param f The Faculty to reset the schedule of.
 	 */
 	public void resetFacultySchedule(Faculty f) {
-		f.schedule.resetSchedule();
+		if (currentUser != null && !(currentUser instanceof Student)) {
+			f.schedule.resetSchedule();
+		}
 	}
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.pack_scheduler.catalog.CourseCatalog;
 import edu.ncsu.csc216.pack_scheduler.directory.StudentDirectory;
+import edu.ncsu.csc216.pack_scheduler.user.Faculty;
 import edu.ncsu.csc216.pack_scheduler.user.Student;
 import edu.ncsu.csc216.pack_scheduler.user.schedule.Schedule;
 
@@ -478,7 +479,23 @@ public class RegistrationManagerTest {
 	 */
 	@Test
 	public void testAddFacultyToCourse() {
+		Faculty f = new Faculty("Sarah", "Heckman", "sesmith5", "sesmith5@ncsu.edu", "pw", 2);
+		CourseCatalog catalog = manager.getCourseCatalog();
+		catalog.loadCoursesFromFile("ts-test-files/course_records.txt");
+
+		manager.logout(); // In case not handled elsewhere
+		// Current user null
+		assertFalse(manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
+		manager.getStudentDirectory().addStudent("Jane", "Austin", "jaustin", "jaustin@ncsu.edu", "password",
+				"password", 17);
+		assertTrue(manager.login("jaustin", "password"));
+		// Current user is a student
+		assertFalse(manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
 		
+		manager.logout();
+		manager.login("registrar", "Regi5tr@r");
+		// Add faculty
+		assertTrue(manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
 	}
 	
 	/**
@@ -486,7 +503,25 @@ public class RegistrationManagerTest {
 	 */
 	@Test
 	public void testRemoveFacultyFromCourse() {
+		Faculty f = new Faculty("Sarah", "Heckman", "sesmith5", "sesmith5@ncsu.edu", "pw", 2);
+		CourseCatalog catalog = manager.getCourseCatalog();
+		catalog.loadCoursesFromFile("ts-test-files/course_records.txt");
+
+		manager.logout(); // In case not handled elsewhere
+		// Current user null
+		assertFalse(manager.removeFacultyFromCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
+		manager.getStudentDirectory().addStudent("Jane", "Austin", "jaustin", "jaustin@ncsu.edu", "password",
+				"password", 17);
+		assertTrue(manager.login("jaustin", "password"));
+		// Current user is a student
+		assertFalse(manager.removeFacultyFromCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
 		
+		manager.logout();
+		manager.login("registrar", "Regi5tr@r");
+		// Add faculty
+		assertTrue(manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
+		assertTrue(manager.removeFacultyFromCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
+		assertFalse(manager.removeFacultyFromCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
 	}
 	
 	/**
@@ -494,6 +529,16 @@ public class RegistrationManagerTest {
 	 */
 	@Test
 	public void testResetFacultySchedule() {
+		Faculty f = new Faculty("Sarah", "Heckman", "sesmith5", "sesmith5@ncsu.edu", "pw", 2);
+		CourseCatalog catalog = manager.getCourseCatalog();
+		catalog.loadCoursesFromFile("ts-test-files/course_records.txt");
 		
+		manager.logout();
+		manager.login("registrar", "Regi5tr@r");
+		// Add faculty
+		assertTrue(manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
+		assertEquals(1, f.schedule.getNumScheduledCourses());
+		manager.resetFacultySchedule(f);
+		assertEquals(0, f.schedule.getNumScheduledCourses());
 	}
 }

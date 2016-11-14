@@ -33,10 +33,10 @@ public class CourseRoll {
 		if (c == null) {
 			throw new IllegalArgumentException("Course cannot be null.");
 		}
-		setCourse(c);
-		setEnrollmentCap(i);
 		roll = new LinkedAbstractList<Student>(enrollmentCap);
 		waitlist = new LinkedQueue<Student>(WAITLIST_SIZE);
+		setCourse(c);
+		setEnrollmentCap(i);
 	}
 	/**
 	 * Sets the course
@@ -56,20 +56,12 @@ public class CourseRoll {
 	 * @param i new enrollment cap that wants to be set
 	 */
 	public void setEnrollmentCap(int i){
-		if(roll == null)
-			if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT)
-				enrollmentCap = i;
-			else 
-				throw new IllegalArgumentException();
-		else if(roll != null)
-			if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT && roll.size() <= i){
-				enrollmentCap = i;
-				roll.setCapacity(enrollmentCap);
-			}
-			else
-				throw new IllegalArgumentException();
-		else 
+		if(i <= MAX_ENROLLMENT && i >= MIN_ENROLLMENT && roll.size() <= i){
+			enrollmentCap = i;
+			roll.setCapacity(enrollmentCap);
+		} else
 			throw new IllegalArgumentException();
+		
 	}
 	/**
 	 * enroll a new student
