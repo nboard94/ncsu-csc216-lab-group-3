@@ -105,7 +105,7 @@ public class LinkedListRecursive<E> {
 			return false;
 		}
 		if (element == null) {
-			throw new NullPointerException();
+			return false;
 		}
 		if (get(0).equals(element)) {
 			front = front.next;
@@ -227,7 +227,7 @@ public class LinkedListRecursive<E> {
 		 */
 		private E remove(int index) {
 			if (index == 0) {
-				E temp = data;
+				E temp = next.data;
 				this.next = this.next.next;
 				size--;
 				return temp;
