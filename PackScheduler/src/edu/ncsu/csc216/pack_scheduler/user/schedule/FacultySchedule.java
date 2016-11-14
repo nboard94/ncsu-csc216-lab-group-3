@@ -34,6 +34,9 @@ public class FacultySchedule {
 			if (schedule.get(i).isDuplicate(course)) {
 				throw new IllegalArgumentException("Already assigned " + course.getName());
 			}
+			if (schedule.get(i).getName().equals(course.getName())) {
+				throw new IllegalArgumentException("Already assigned " + course.getName());
+			}
 			try {
 				schedule.get(i).checkConflict(course);
 			} catch (ConflictException e) {
@@ -59,10 +62,15 @@ public class FacultySchedule {
 		if (schedule.isEmpty()) {
 			return false;
 		}
-		if (schedule.remove(course)) {
-			course.setInstructorId(null);
-			return true;
+		for (int i = 0; i < schedule.size(); i++) {
+			if (schedule.get(i) == course) {
+				if (schedule.remove(course)) {
+					course.setInstructorId(null);
+					return true;
+				}
+			}
 		}
+		
 		return false;
 	}
 	
