@@ -473,16 +473,25 @@ public class RegistrationManagerTest {
 		manager.logout();
 	}
 
+	/**
+	 * Tests RegistrationManager.AddFacultyToCourse().
+	 */
 	@Test
 	public void testAddFacultyToCourse() {
 		
 	}
 	
+	/**
+	 * Tests RegistrationManager.RemoveFacultyFromCourse().
+	 */
 	@Test
 	public void testRemoveFacultyFromCourse() {
 		
 	}
 	
+	/**
+	 * Tests RegistrationManager.ResetFacultySchedule().
+	 */
 	@Test
 	public void testResetFacultySchedule() {
 		

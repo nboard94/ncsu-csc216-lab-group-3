@@ -265,27 +265,28 @@ public class RegistrationManager {
 	}
 	
 	/**
-	 * 
-	 * @param c
-	 * @param f
-	 * @return
+	 * Adds a specific Faculty member to a specific Course.
+	 * @param c The Course to add the Faculty member to.
+	 * @param f The Faculty to add to a course.
+	 * @return True if the faculty was added to the course, false if otherwise.
 	 */
 	public boolean addFacultyToCourse(Course c, Faculty f) {
 		return false;
 	}
+	
 	/**
-	 * 
-	 * @param c
-	 * @param f
-	 * @return
+	 * Removes a specific Faculty member from a specific Course.
+	 * @param c The Course to remove the Faculty from.
+	 * @param f The Faculty that will be removed from the course.
+	 * @return True if the faculty was removed from the course, false if otherwise.
 	 */
 	public boolean removeFacultyFromCourse(Course c, Faculty f) {
 		return false;
 	}
 	
 	/**
-	 * 
-	 * @param f
+	 * Resets the Faculty's schedule.
+	 * @param f The Faculty to reset the schedule of.
 	 */
 	public void resetFacultySchedule(Faculty f) {
 		f.schedule.resetSchedule();
