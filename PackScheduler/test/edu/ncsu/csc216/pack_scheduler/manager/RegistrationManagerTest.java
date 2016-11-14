@@ -552,6 +552,12 @@ public class RegistrationManagerTest {
 		catalog.loadCoursesFromFile("ts-test-files/course_records.txt");
 		
 		manager.logout();
+		try {
+			manager.resetFacultySchedule(f);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Illegal Action");
+		}
 		manager.login("registrar", "Regi5tr@r");
 		// Add faculty
 		assertTrue(manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
