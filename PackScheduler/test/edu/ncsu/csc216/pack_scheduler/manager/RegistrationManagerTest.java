@@ -485,13 +485,21 @@ public class RegistrationManagerTest {
 
 		manager.logout(); // In case not handled elsewhere
 		// Current user null
-		assertFalse(manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
+		try {
+			manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f);
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Illegal Action");
+		}
+		
 		manager.getStudentDirectory().addStudent("Jane", "Austin", "jaustin", "jaustin@ncsu.edu", "password",
 				"password", 17);
 		assertTrue(manager.login("jaustin", "password"));
 		// Current user is a student
-		assertFalse(manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
-		
+		try {
+			manager.addFacultyToCourse(catalog.getCourseFromCatalog("CSC216", "001"), f);
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Illegal Action");
+		}
 		manager.logout();
 		manager.login("registrar", "Regi5tr@r");
 		// Add faculty
@@ -509,12 +517,22 @@ public class RegistrationManagerTest {
 
 		manager.logout(); // In case not handled elsewhere
 		// Current user null
-		assertFalse(manager.removeFacultyFromCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
+		try {
+			manager.removeFacultyFromCourse(catalog.getCourseFromCatalog("CSC216", "001"), f);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Illegal Action");
+		}
 		manager.getStudentDirectory().addStudent("Jane", "Austin", "jaustin", "jaustin@ncsu.edu", "password",
 				"password", 17);
 		assertTrue(manager.login("jaustin", "password"));
 		// Current user is a student
-		assertFalse(manager.removeFacultyFromCourse(catalog.getCourseFromCatalog("CSC216", "001"), f));
+		try {
+			manager.removeFacultyFromCourse(catalog.getCourseFromCatalog("CSC216", "001"), f);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Illegal Action");
+		}
 		
 		manager.logout();
 		manager.login("registrar", "Regi5tr@r");
