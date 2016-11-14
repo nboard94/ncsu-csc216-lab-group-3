@@ -102,7 +102,7 @@ public class LinkedListRecursive<E> {
 	 */
 	public boolean remove(E element) {
 		if (size == 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Empty list");
 		}
 		if (element == null) {
 			throw new NullPointerException();
@@ -149,6 +149,9 @@ public class LinkedListRecursive<E> {
 		}
 		if (element == null) {
 			throw new NullPointerException();
+		}
+		if (contains(element)) {
+			throw new IllegalArgumentException();
 		}
 		return front.set(index, element);
 	}
