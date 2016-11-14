@@ -271,7 +271,7 @@ public class RegistrationManager {
 	 * @return True if the faculty was added to the course, false if otherwise.
 	 */
 	public boolean addFacultyToCourse(Course c, Faculty f) {
-		if (currentUser == null || (currentUser instanceof Student)) {
+		if (currentUser == null || !(currentUser instanceof Registrar)) {
 			throw new IllegalArgumentException("Illegal Action");
 			
 		}
@@ -285,7 +285,7 @@ public class RegistrationManager {
 	 * @return True if the faculty was removed from the course, false if otherwise.
 	 */
 	public boolean removeFacultyFromCourse(Course c, Faculty f) {
-		if (currentUser == null || (currentUser instanceof Student)) {
+		if (currentUser == null || !(currentUser instanceof Registrar)) {
 			throw new IllegalArgumentException("Illegal Action");
 		}
 		return f.schedule.removeCourseFromSchedule(c);
@@ -296,7 +296,7 @@ public class RegistrationManager {
 	 * @param f The Faculty to reset the schedule of.
 	 */
 	public void resetFacultySchedule(Faculty f) {
-		if (currentUser == null || (currentUser instanceof Student)) {
+		if (currentUser == null || !(currentUser instanceof Registrar)) {
 			throw new IllegalArgumentException("Illegal Action");
 		}
 		f.schedule.resetSchedule();
