@@ -158,7 +158,7 @@ public class StudentRegistrationPanel  extends JPanel implements ActionListener 
 		//Set up Catalog table
 		catalogTableModel = new CourseTableModel(true);
 		tableCatalog = new JTable(catalogTableModel) {
-			private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1L;
 			
 			/**
 			 * Set custom tool tips for cells

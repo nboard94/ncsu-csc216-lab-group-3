@@ -23,6 +23,7 @@ import javax.swing.table.AbstractTableModel;
 
 import edu.ncsu.csc216.pack_scheduler.catalog.CourseCatalog;
 import edu.ncsu.csc216.pack_scheduler.course.Course;
+import edu.ncsu.csc216.pack_scheduler.course.roll.CourseRoll;
 import edu.ncsu.csc216.pack_scheduler.manager.RegistrationManager;
 //import edu.ncsu.csc216.pack_scheduler.ui.StudentRegistrationPanel.CourseTableModel;
 import edu.ncsu.csc216.pack_scheduler.user.Faculty;
@@ -39,10 +40,6 @@ public class FacultySchedulePanel extends JPanel {
 	
 	private JTable tableSchedule;
 	private JTable tableRoll;
-//	private CourseTableModel scheduleTableModel;
-//	private StudentTableModel rollTableModel;
-	/** Student's Schedule text field */
-	private JTextField txtScheduleTitle;
 	/** JTable for displaying the catalog of Courses */
 	private JTable tableCatalog;
 	/** Border for Schedule */
@@ -60,22 +57,23 @@ public class FacultySchedulePanel extends JPanel {
 	private JLabel lblEnrollmentCapTitle;
 	private JLabel lblOpenSeatsTitle;
 	private JLabel lblWaitlistTitle;
-	private JLabel lblName;
-	private JLabel lblSection;
-	private JLabel lblTitle;
-	private JLabel lblInstructor;
-	private JLabel lblCredits;
-	private JLabel lblMeeting;
-	private JLabel lblEnrollmentCap;
-	private JLabel lblOpenSeats;
-	private JLabel lblWaitlist;
+	private JLabel lblName = new JLabel("");
+	private JLabel lblSection = new JLabel("");
+	private JLabel lblTitle = new JLabel("");
+	private JLabel lblInstructor = new JLabel("");
+	private JLabel lblCredits = new JLabel("");
+	private JLabel lblMeeting = new JLabel("");
+	private JLabel lblEnrollmentCap = new JLabel("");
+	private JLabel lblOpenSeats = new JLabel("");
+	private JLabel lblWaitlist = new JLabel("");
 	private FacultySchedule schedule;
 	/** Current user */
 	private Faculty currentUser;
-	/** Course catalog */
 	private CourseCatalog catalog;
+	private CourseRoll roll;
+	/** Model for course table */
 	private CourseTableModel scheduleTableModel;
-
+	private CourseRollTableModel rollTableModel;
 
 
 	public FacultySchedulePanel(){
@@ -85,56 +83,87 @@ public class FacultySchedulePanel extends JPanel {
 		currentUser = (Faculty)manager.getCurrentUser();
 		catalog = manager.getCourseCatalog();
 		
-		pnlCourseDetails = new JPanel();
-		pnlCourseDetails.setLayout(new GridLayout(3, 1));
-		lblNameTitle = new JLabel("Name: ");
-		pnlCourseDetails.add(lblNameTitle);
-		lblSectionTitle = new JLabel("Section: ");
-		pnlCourseDetails.add(lblSectionTitle);
-		lblTitleTitle = new JLabel("Title: ");
-		pnlCourseDetails.add(lblTitleTitle);
-		lblInstructorTitle = new JLabel("Instructor: ");
-		pnlCourseDetails.add(lblInstructorTitle);
-		lblCreditsTitle = new JLabel("Credits: ");
-		pnlCourseDetails.add(lblCreditsTitle);
-		lblMeetingTitle = new JLabel("Meeting: ");
-		pnlCourseDetails.add(lblMeetingTitle);
-		lblEnrollmentCapTitle = new JLabel("Enrollment Cap: ");
-		pnlCourseDetails.add(lblEnrollmentCapTitle);
-		lblOpenSeatsTitle = new JLabel("Open Seats: ");
-		pnlCourseDetails.add(lblOpenSeatsTitle);
-		lblWaitlistTitle = new JLabel("Waitlist: ");
-		pnlCourseDetails.add(lblWaitlistTitle);
-		
 		// Set up Schedule and Course roll tables
 		scheduleTableModel = new CourseTableModel(true);
-		CourseRollTableModel rollTableModel = new CourseRollTableModel();
+		rollTableModel = new CourseRollTableModel();
 		tableCatalog = new JTable(scheduleTableModel);
 		tableRoll = new JTable(rollTableModel);
 		tableCatalog.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableCatalog.setPreferredScrollableViewportSize(new Dimension(500, 500));
 		tableCatalog.setFillsViewportHeight(true);
+		tableCatalog.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				String name = tableCatalog.getValueAt(tableCatalog.getSelectedRow(), 0).toString();
+				String section = tableCatalog.getValueAt(tableCatalog.getSelectedRow(), 1).toString();
+				Course c = catalog.getCourseFromCatalog(name, section);
+				roll = c.getCourseRoll();
+				updateCourseDetails(c);
+			}
+		});
 		tableRoll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableRoll.setPreferredScrollableViewportSize(new Dimension(500, 500));
 		tableRoll.setFillsViewportHeight(true);
 		
 		scrollSchedule = new JScrollPane(tableCatalog, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		lowerEtched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 		Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 		TitledBorder borderFacultySchedule = BorderFactory.createTitledBorder(border, "Faculty Schedule");
 		scrollSchedule.setBorder(borderFacultySchedule);
 		scrollSchedule.setPreferredSize(new Dimension(100, 100));
 	
-		Border lowerEtched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
-		TitledBorder borderCourseDetails = BorderFactory.createTitledBorder(lowerEtched, "Course Details");
-		pnlCourseDetails.setBorder(borderCourseDetails);
-		pnlCourseDetails.setToolTipText("Course Details");
-		pnlCourseDetails.setPreferredSize(new Dimension(200, 200));
-		
 		// Set up Course Roll table
 		scrollRoll = new JScrollPane(tableRoll, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		TitledBorder borderCourseRoll = BorderFactory.createTitledBorder(lowerEtched, "Course Roll");
 		scrollRoll.setBorder(borderCourseRoll);
 		scrollRoll.setPreferredSize(new Dimension(100,100));
+		
+		updateTables();
+		// Set up Course Details panel
+		pnlCourseDetails = new JPanel();
+		pnlCourseDetails.setLayout(new GridLayout(4, 1));
+		lblNameTitle = new JLabel("Name: ");
+		pnlCourseDetails.add(lblNameTitle);
+		pnlCourseDetails.add(lblName);
+		
+		lblSectionTitle = new JLabel("Section: ");
+		pnlCourseDetails.add(lblSectionTitle);
+		pnlCourseDetails.add(lblSection);
+		
+		lblTitleTitle = new JLabel("Title: ");
+		pnlCourseDetails.add(lblTitleTitle);
+		pnlCourseDetails.add(lblTitle);
+		
+		lblInstructorTitle = new JLabel("Instructor: ");
+		pnlCourseDetails.add(lblInstructorTitle);
+		pnlCourseDetails.add(lblInstructor);
+		
+		lblCreditsTitle = new JLabel("Credits: ");
+		pnlCourseDetails.add(lblCreditsTitle);
+		pnlCourseDetails.add(lblCredits);
+		
+		lblMeetingTitle = new JLabel("Meeting: ");
+		pnlCourseDetails.add(lblMeetingTitle);
+		pnlCourseDetails.add(lblMeeting);
+		
+		lblEnrollmentCapTitle = new JLabel("Enrollment Cap: ");
+		pnlCourseDetails.add(lblEnrollmentCapTitle);
+		pnlCourseDetails.add(lblEnrollmentCap);
+		
+		lblOpenSeatsTitle = new JLabel("Open Seats: ");
+		pnlCourseDetails.add(lblOpenSeatsTitle);
+		pnlCourseDetails.add(lblOpenSeats);
+		
+		lblWaitlistTitle = new JLabel("Waitlist: ");
+		pnlCourseDetails.add(lblWaitlistTitle);
+		pnlCourseDetails.add(lblWaitlist);
+		
+		
+		TitledBorder borderCourseDetails = BorderFactory.createTitledBorder(lowerEtched, "Course Details");
+		pnlCourseDetails.setBorder(borderCourseDetails);
+		pnlCourseDetails.setToolTipText("Course Details");
+		pnlCourseDetails.setPreferredSize(new Dimension(200, 200));
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -165,7 +194,23 @@ public class FacultySchedulePanel extends JPanel {
 		add(scrollRoll, c);
 	}
 
-		
+	public void updateTables() {
+		scheduleTableModel.updateData();
+		rollTableModel.updateData();
+	}
+	
+	private void updateCourseDetails(Course c) {
+		if (c != null) {
+			lblName.setText(c.getName());
+			lblSection.setText(c.getSection());
+			lblTitle.setText(c.getTitle());
+			lblInstructor.setText(c.getInstructorId());
+			lblCredits.setText("" + c.getCredits());
+			lblMeeting.setText(c.getMeetingString());
+			lblEnrollmentCap.setText("" + c.getCourseRoll().getEnrollmentCap());
+			lblOpenSeats.setText("" + c.getCourseRoll().getOpenSeats());
+		}
+	}
 	/**
 	 * {@link CourseTableModel} is the object underlying the {@link JTable} object that displays
 	 * the list of {@link Course}s to the user.
@@ -247,7 +292,7 @@ public class FacultySchedulePanel extends JPanel {
 			if (currentUser != null) {
 				schedule = currentUser.getSchedule();
 				data = schedule.getScheduledCourses();
-					
+				
 				FacultySchedulePanel.this.repaint();
 				FacultySchedulePanel.this.validate();
 			}
@@ -324,18 +369,18 @@ public class FacultySchedulePanel extends JPanel {
 		 * Updates the given model with {@link Course} information from the {@link WolfScheduler}.
 		 */
 		private void updateData() {
-			
-			currentUser = (Faculty)RegistrationManager.getInstance().getCurrentUser();
-			if (currentUser != null) {
-				schedule = currentUser.getSchedule();
-				
-				data = schedule.getScheduledCourses();
-					
-				FacultySchedulePanel.this.repaint();
-				FacultySchedulePanel.this.validate();
+			if (roll != null) {
+				Object[][] info = new Object[roll.roll.size()][3];
+				for(int i = 0; i < roll.roll.size(); i++) {
+					info[i][0] = roll.roll.get(i).getFirstName();
+					info[i][1] = roll.roll.get(i).getLastName();
+					info[i][2] = roll.roll.get(i).getId();
+				}
+				data = info;
 			}
+			FacultySchedulePanel.this.repaint();
+			FacultySchedulePanel.this.validate();
 		}
-		
 	}
 }
 

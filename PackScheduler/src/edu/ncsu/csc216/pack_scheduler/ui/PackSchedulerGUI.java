@@ -205,6 +205,7 @@ public class PackSchedulerGUI {
 						pnlStudent.updateTables();
 					} else if (manager.getCurrentUser() instanceof Faculty) {
 						cardLayout.show(panel, FACULTY_PANEL );
+						pnlFaculty.updateTables();
 					} else {
 						cardLayout.show(panel, REGISTRAR_PANEL);
 					}
@@ -460,6 +461,13 @@ public class PackSchedulerGUI {
 				RegistrationManager.getInstance().logout();
 				cardLayout.show(panel, LOGIN_PANEL);
 			}
+		}
+		
+		/**
+		 * Updates tables
+		 */
+		public void updateTables() {
+			facultySchedule.updateTables();
 		}
 	}
 
